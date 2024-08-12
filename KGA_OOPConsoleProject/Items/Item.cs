@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace KGA_OOPConsoleProject.Items
 {
     // 아이템 생성 클래스
-    public class Items
+    public class Item
     {
         // 아이템 사용 변수
         /*

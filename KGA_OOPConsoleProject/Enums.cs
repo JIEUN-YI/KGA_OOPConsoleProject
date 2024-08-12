@@ -10,11 +10,11 @@ namespace KGA_OOPConsoleProject
     // 장면 열거형
     public enum SceneType
     {
-        Title, Select, Room, Shop, Status, School, Manner, Music, VillageMt, DeepRiver, DarkForest
+        Title, Select, Room, Shop, School, Manner, Music, VillageMt, DeepRiver, DarkForest, Size
     }
     /*
      * Title(게임시작 타이틀화면) , Select(게임정보 입력화면), 
-     * Room(플레이어 기본 화면/방), Shop(상점), Status(스탯 확인 화면)
+     * Room(플레이어 기본 화면/방), Shop(상점),
      * School(학교), Training(무술수업), Manner(예법수업), Music(음악수업)
      * VillageMt(마을 뒷 산), DeepRiver(깊은 강가), DarkForest(어두운 숲)
      *    - 각 모험지는 Map 형식을 차용하여 미로찾기 형식으로 진행할 것
