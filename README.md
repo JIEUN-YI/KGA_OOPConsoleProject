@@ -3,8 +3,8 @@
    - 1일차(12일)
      - 게임의 구성요소 선정
      - 프로젝트 일정 수립
-     - 프로젝트 구조 설계
-     - enum 작성 **structure build 커밋 완료**
+     - 프로젝트 구조 설계 **structure build 커밋 완료**
+     - enum 작성
      - Player 클래스 제작
      - GameData 클래스 제작
    - 2일차(13일)
