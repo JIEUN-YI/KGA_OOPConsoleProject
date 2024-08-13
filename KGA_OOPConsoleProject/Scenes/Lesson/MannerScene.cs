@@ -8,7 +8,7 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
 {
     public class MannerScene : Scene
     {
-        public MannerScene(GameData game) : base(game)
+        public MannerScene(GameData game, Player player) : base(game, player)
         {
 
         }

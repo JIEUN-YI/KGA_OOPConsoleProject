@@ -8,7 +8,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 {
     public class DarkForestScene : Scene
     {
-        public DarkForestScene(GameData game) : base(game)
+        public DarkForestScene(GameData game, Player player) : base(game, player)
         {
 
         }

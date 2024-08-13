@@ -8,7 +8,7 @@ namespace KGA_OOPConsoleProject.Scenes
 {
     public class ShopScene : Scene
     {
-        public ShopScene(GameData game) : base(game)
+        public ShopScene(GameData game, Player player) : base(game, player)
         {
 
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KGA_OOPConsoleProject.Scenes
@@ -14,7 +15,7 @@ namespace KGA_OOPConsoleProject.Scenes
         private string input;
         private State nowState;
 
-        public SelectScene(GameData game) : base(game)
+        public SelectScene(GameData game, Player player) : base(game, player)
         {
 
         }
@@ -32,7 +33,18 @@ namespace KGA_OOPConsoleProject.Scenes
             }
             else if (nowState == State.Confirm)
             {
-                player.ShowStatus();
+                Console.WriteLine(" === 상태창 ========================== ");
+                Console.WriteLine($" 이름 : {player.name,+2}");
+                Console.WriteLine($" 체력   : {player.maxHp,+2}");
+                Console.WriteLine($" 공격력 : {player.ATK,+2}");
+                Console.WriteLine($" 방어력 : {player.DEF,+2}");
+                Console.WriteLine($" 무술능력 : {player.str,+2}");
+                Console.WriteLine($" 지력   : {player.INT,+2}");
+                Console.WriteLine($" 예법   : {player.manner,+2}");
+                Console.WriteLine($" 감수성 : {player.sensi,+2}");
+                Console.WriteLine($" 사냥한 몬스터 수 : {player.mCount,+2}");
+                Console.WriteLine($" 소지금 : {player.money,+2}G");
+                Console.WriteLine(" ===================================== ");
                 Console.WriteLine();
                 Console.Write("이대로 플레이 하시겠습니까?(y/n)");
             }
@@ -41,12 +53,6 @@ namespace KGA_OOPConsoleProject.Scenes
         public override void Input()
         {
             input = Console.ReadLine();
-            /* 
-             * 이름을 입력받아서 플레이어의 이름에 저장되어야 하는데
-             * player.name = Console.ReadLine();
-             * 으로 입력받는 경우
-             * System.NullReferenceException: 'Object reference not set to an instance of an object.' 에러 발생
-             */
         }
         public override void Update()
         {
@@ -59,7 +65,7 @@ namespace KGA_OOPConsoleProject.Scenes
                 else
                 {
                     player.name = input;
-                    nowState = State.Confirm; // 왜...? System.NullReferenceException?? 왜???
+                    nowState = State.Confirm;
 
                 }
             }

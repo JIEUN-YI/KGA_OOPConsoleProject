@@ -39,19 +39,20 @@ namespace KGA_OOPConsoleProject
         private void Start()
         {
             isRunning = true;
+            Player player = new Player();
             //열거형 마지막 부분에 Size를 추가하여 열거형의 갯수만큼 배열 생성
             scenes = new Scene[(int)SceneType.Size];
-            scenes[(int)SceneType.Title] = new TitleScene(this);
-            scenes[(int)SceneType.Select] = new SelectScene(this);
-            scenes[(int)SceneType.Room] = new RoomScene(this);
-            scenes[(int)SceneType.Shop] = new ShopScene(this);
-            scenes[(int)SceneType.Training] = new TrainingScene(this);
-            scenes[(int)SceneType.School] = new SchoolScene(this);
-            scenes[(int)SceneType.Manner] = new MannerScene(this);
-            scenes[(int)SceneType.Music] = new MusicScene(this);
-            scenes[(int)SceneType.VillageMt] = new VillageMtScene(this);
-            scenes[(int)SceneType.DeepRiver] = new DeepRiverScene(this);
-            scenes[(int)SceneType.DarkForest] = new DarkForestScene(this);
+            scenes[(int)SceneType.Title] = new TitleScene(this, player);
+            scenes[(int)SceneType.Select] = new SelectScene(this, player);
+            scenes[(int)SceneType.Room] = new RoomScene(this, player);
+            scenes[(int)SceneType.Shop] = new ShopScene(this, player);
+            scenes[(int)SceneType.Training] = new TrainingScene(this, player);
+            scenes[(int)SceneType.School] = new SchoolScene(this, player);
+            scenes[(int)SceneType.Manner] = new MannerScene(this, player);
+            scenes[(int)SceneType.Music] = new MusicScene(this, player);
+            scenes[(int)SceneType.VillageMt] = new VillageMtScene(this, player);
+            scenes[(int)SceneType.DeepRiver] = new DeepRiverScene(this, player);
+            scenes[(int)SceneType.DarkForest] = new DarkForestScene(this, player);
 
             nowScene = scenes[(int)SceneType.Title];
             nowScene.Enter();

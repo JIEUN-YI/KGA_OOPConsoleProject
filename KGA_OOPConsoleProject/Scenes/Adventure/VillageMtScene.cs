@@ -8,7 +8,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 {
     public class VillageMtScene : Scene
     {
-        public VillageMtScene(GameData game) : base(game)
+        public VillageMtScene(GameData game, Player player) : base(game, player)
         {
 
         }

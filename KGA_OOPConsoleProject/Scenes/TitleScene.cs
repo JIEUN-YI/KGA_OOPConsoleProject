@@ -9,7 +9,7 @@ namespace KGA_OOPConsoleProject.Scenes
     public class TitleScene : Scene
     {
 
-        public TitleScene(GameData game) : base(game)
+        public TitleScene(GameData game, Player player) : base(game, player)
         {
 
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
 {
     public class MusicScene : Scene
     {
-        public MusicScene(GameData game) : base(game)
+        public MusicScene(GameData game, Player player) : base(game, player)
         {
 
         }

@@ -8,7 +8,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 {
     public class DeepRiverScene : Scene
     {
-        public DeepRiverScene(GameData game) : base(game)
+        public DeepRiverScene(GameData game, Player player) : base(game, player)
         {
 
         }
