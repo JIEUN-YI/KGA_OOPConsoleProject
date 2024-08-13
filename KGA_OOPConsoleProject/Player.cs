@@ -54,17 +54,16 @@ namespace KGA_OOPConsoleProject
         /// <param name="game"></param>
         public void ShowStatus(GameData game) 
         {
-
+            money = Math.Clamp(money, 0, 99999999);
+            maxHp = Math.Clamp(maxHp, 0, 100); // 임시제작 능력치 100 - 최대 능력치는 게임 기간 대비로 조절 필수
+            mCount = Math.Clamp(mCount, 0, 100);
+            ATK = Math.Clamp(ATK, 0, 100);
+            DEF = Math.Clamp(DEF, 0, 100);
+            str = Math.Clamp(str, 0, 100);
+            INT = Math.Clamp(INT, 0, 100);
+            manner = Math.Clamp(manner, 0, 100);
+            sensi = Math.Clamp(sensi, 0, 100);
             // 스테이터스의 범위 지정
-            Math.Clamp(money, 0, 99999999);
-            Math.Clamp(maxHp, 0, 999);
-            Math.Clamp(mCount, 0, 999);
-            Math.Clamp(ATK, 0, 999);
-            Math.Clamp(DEF, 0, 999);
-            Math.Clamp(str, 0, 999);
-            Math.Clamp(INT, 0, 999);
-            Math.Clamp(manner, 0, 999);
-            Math.Clamp(sensi, 0, 999);
             Console.Clear();
             Console.WriteLine(" === 상태창 ========================== ");
             Console.WriteLine($" 이름 : {name,-2}");

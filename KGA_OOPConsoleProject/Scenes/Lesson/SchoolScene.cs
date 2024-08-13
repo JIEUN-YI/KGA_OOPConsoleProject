@@ -2,7 +2,7 @@
 {
     public class SchoolScene : Scene
     {
-        public enum State { Start, Lesson } // 시작하는 상태. 수업 상태
+        public enum State { Start, Lesson } // 시작하는 상태, 수업 상태
         public State nowState;
         Random ran = new Random(); // 랜덤을 사용
         private int chance;
@@ -25,7 +25,7 @@
             Console.Clear();
             if (nowState == State.Start) // 수업 시작 시
             {
-                switch (chance)
+                switch (chance) // 랜덤으로 인삿말 출력
                 {
                     case 1:
                         Console.WriteLine(" ===================================== ");
@@ -35,7 +35,7 @@
                         break;
                     case 2:
                         Console.WriteLine(" ===================================== ");
-                        Console.WriteLine($" {player.name} : 오늘은 어떤 걸 배우게 될까");
+                        Console.WriteLine($" {player.name} : 오늘은 어떤 걸 배우게 될까?");
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                         break;
@@ -80,9 +80,9 @@
             }
             else if(nowState == State.Lesson)
             {
+                UpgradeStatus();
                 game.ChangeScene(SceneType.SelectSchedule);
             }
-
 
         }
         public override void Exit()
@@ -90,6 +90,20 @@
 
         }
 
+        /* 코멘트
+         * Lesson 폴더 안의 클래스끼리 추상으로 묶고서 작업했어도 괜찮았을 것 같다.
+         *  - 능력치 증감 함수 / 수업 내용 문장 함수 / 플레이어 평가 함수 까지 포함한 추상클래스
+         * 그러면 Scene 부모클래스가 아니라 모험 장면 부모클래스 / Lesson장면 부모클래스로 나눠야 했을 것 같고
+         * 이 경우에 장면의 대분류가 늘어난다면 좋을 것 같다
+         * 예를 들어서 수업과 모험 외에도 아르바이트나 휴식 바캉스가 따로 있는 경우
+         */
+        private void UpgradeStatus()
+        {
+            player.INT += 5;
+            player.maxHp += 2;
+            player.INT = Math.Clamp(player.INT, 0, 100); // 범위를 벗어나는 경우 최대/최소값을 맞추기
+            player.maxHp = Math.Clamp(player.maxHp, 0, 100);
+        }
         private void LessonConment() // 수업 내용 문장
         {
             chance = ran.Next(1, 6);

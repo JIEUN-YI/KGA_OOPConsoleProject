@@ -11,7 +11,7 @@ namespace KGA_OOPConsoleProject
         private Player player;
         public Scene[] scenes;
         public Scene nowScene;
-        public int allDay = 3; //검사용
+        public int allDay = 3; //검사용 // 임시기간 - 게임 기간과 최대 능력치는 조절 필수
         public int nowDay = 1;
         /* 
          * 게임의 진행 여부 - bool 타입

@@ -142,7 +142,7 @@
                     break;
                 case State.finish:
                     game.nowDay++; // 하루가 끝나면 nowDay++
-                    nowState = State.one;
+                    nowState = State.one; // 하루가 끝났으므로 nowState도 초기화
                     if (game.nowDay == game.allDay) // 전체 일수와 같아지면
                     {
                         game.ChangeScene(SceneType.Ending); //엔딩씬으로 이동
