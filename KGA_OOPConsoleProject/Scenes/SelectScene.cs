@@ -14,7 +14,7 @@ namespace KGA_OOPConsoleProject.Scenes
         private string input;
         private State nowState;
 
-        public SelectScene(GameData game, Player player) : base(game, player)
+        public SelectScene(GameData game) : base(game)
         {
 
         }

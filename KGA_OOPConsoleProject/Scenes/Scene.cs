@@ -15,10 +15,9 @@ namespace KGA_OOPConsoleProject.Scenes
         protected Player player;
 
         // 장면을 생성하는 경우 무조건 GameData 변수가 필요함 - 생성자 생성
-        public Scene(GameData game, Player player)
+        public Scene(GameData game)
         {
             this.game = game;
-            this.player = player;
         }
 
         // 각 장면에서 사용하는 함수
