@@ -1,6 +1,10 @@
 ﻿using KGA_OOPConsoleProject.Scenes;
 using KGA_OOPConsoleProject.Scenes.Adventure;
 using KGA_OOPConsoleProject.Scenes.Lesson;
+/* 코멘트
+ * Adcenture폴더 속 Scene들에서 공통적으로 사용하는 Move함수들을 GameData에서 일괄로 구현해보려고 했으나 실패
+ * 조금 더 연구가 필요함
+ */
 namespace KGA_OOPConsoleProject
 {
     //게임 데이터 클래스
@@ -11,7 +15,7 @@ namespace KGA_OOPConsoleProject
         private Player player;
         public Scene[] scenes;
         public Scene nowScene;
-        public int allDay = 3; //검사용 // 임시기간 - 게임 기간과 최대 능력치는 조절 필수
+        public int allDay = 10; //검사용 // 임시기간 - 게임 기간과 최대 능력치는 조절 필수
         public int nowDay = 1;
         /* 
          * 게임의 진행 여부 - bool 타입
@@ -22,6 +26,7 @@ namespace KGA_OOPConsoleProject
          * 현재 플레이 일수 - int 타입
          * 스케쥴 카운팅 - int 타입 / 스케쥴 카운팅 3번 = 현재 플레이 일수++
          */
+
         // 게임데이터 클래스가 가지는 함수들
         public void Run()
         {
@@ -59,17 +64,12 @@ namespace KGA_OOPConsoleProject
             nowScene = scenes[(int)SceneType.Title];
             nowScene.Enter();
         }
-        public void ChangeScene(SceneType scenetype)
-        {
-            nowScene.Exit(); // 원래의 씬에서 빠져나오고
-            nowScene=scenes[(int)scenetype]; // 새로운 씬을 저장
-            nowScene.Enter(); // 새로운 씬에 입장
-        }
         private void Gameover()
         {
             isRunning = false;
             nowScene.Exit();
         }
+
         /*
          * Start() - 게임을 시작할 때 준비해야하는 내용이 담긴 함수
          * 씬(장면) 변경 함수 : 변경할 씬을 받아서 이전의 장면을 종료하고 새로운 장면을 시작
@@ -96,5 +96,16 @@ namespace KGA_OOPConsoleProject
          * - Render() 장면을 그리고 Input() 장면에서 알맞은 행동을 입력받고
          * - Update() 새로운 행동을 시키고 Exit() 장면에서 빠져나옴
          */
+        /// <summary>
+        /// Scene 변경 함수
+        /// </summary>
+        /// <param name="scenetype"></param>
+        public void ChangeScene(SceneType scenetype)
+        {
+            nowScene.Exit(); // 원래의 씬에서 빠져나오고
+            nowScene = scenes[(int)scenetype]; // 새로운 씬을 저장
+            nowScene.Enter(); // 새로운 씬에 입장
+        }
     }
 }
+

@@ -90,6 +90,9 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
         {
 
         }
+        /// <summary>
+        /// 수업 후 증감스텟
+        /// </summary>
         private void UpgradeStatus()
         {
             player.manner += 5;
@@ -99,7 +102,10 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
             player.INT = Math.Clamp(player.INT, 0, 100);
             player.sensi = Math.Clamp(player.sensi, 0, 100);
         }
-        private void LessonConment() // 수업 내용 문장
+        /// <summary>
+        /// 수업 중 코멘트
+        /// </summary>
+        private void LessonConment()
         {
             chance = ran.Next(1, 6);
             switch (chance)
@@ -138,7 +144,10 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
                     break;
             }
         }
-        private void SelfConment() // 플레이어 평가
+        /// <summary>
+        /// 수업 후 코멘트
+        /// </summary>
+        private void SelfConment()
         {
             chance = ran.Next(1, 6);
             switch (chance)
