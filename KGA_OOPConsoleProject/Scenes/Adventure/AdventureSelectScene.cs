@@ -56,14 +56,17 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     switch (input)
                     {
                         case "1":
+                            Console.Clear();
                             game.ChangeScene(SceneType.VillageMt);
                             nowState = State.finish;
                             break;
                         case "2":
+                            Console.Clear();
                             game.ChangeScene(SceneType.DeepRiver);
                             nowState = State.finish;
                             break;
                         case "3":
+                            Console.Clear();
                             game.ChangeScene(SceneType.DarkForest);
                             nowState = State.finish;
                             break;
