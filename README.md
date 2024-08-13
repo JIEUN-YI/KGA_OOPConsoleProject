@@ -37,11 +37,15 @@
   
 - Items 부모추상클래스 작성 **Fix abstract class Item 24.08.13 커밋 완료**
 
-- Scenes 자식클래스 작성
+- Scenes 자식클래스 작성 **Fix Scenes 24.08.13 커밋 완료**
 
-- Monsters 자식클래스 작성
+- Map 기능 제작 **Fix Map 24.08.13 커밋 완료**
+  
+~~- Monsters 자식클래스 작성~~
 
 3일차(14일)
+
+- Monsters 자식클랙스 작성
 
 - Items 자식클래스 작성
   
@@ -49,11 +53,11 @@
   
 - 버그 픽스
   
-- Map 기능 제작
+~~- Map 기능 제작~~
   
 4일차(15일)
 
-- Map 기능 완성하기
+~~- Map 기능 완성하기~~
   
 - 실행 후 버그 확인
   
