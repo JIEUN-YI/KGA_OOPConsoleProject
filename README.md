@@ -5,6 +5,7 @@
 제작 인원 : 1 인 (개인 프로젝트)
 제작 기간 : 5일
 사용 엔진과 언어 : Visual Studio, C#
+기획 링크 : https://codingloading.tistory.com/33 - 비밀번호 KGA
 
 1. 일정
    - 1일차(12일)
