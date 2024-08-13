@@ -6,17 +6,26 @@ using System.Threading.Tasks;
 
 namespace KGA_OOPConsoleProject.Monsters
 {
-    // 몬스터 종류별로 가지고 있는 추상클래스 제작
+    // 몬스터 종류별로 가지고 있는 클래스 제작
     public abstract class Monster
     {
         // 몬스터가 가지는 변수
         string name;
-        int MaxHp;
+        int maxHp;
         int nowMp;
         int ATK;
         int DEF;
         int level;
         SceneType sceneType;
+        public Monster(string name, int maxHp, int ATK, int DEF, int level, SceneType sceneType)
+        {
+            this.name = name;
+            this.maxHp = maxHp;
+            this.ATK = ATK;
+            this.DEF = DEF;
+            this.level = level;
+            this.sceneType = sceneType;
+        }
         /* 
          * 이름 - string 타입
          * MaxHp - int형 최대 체력

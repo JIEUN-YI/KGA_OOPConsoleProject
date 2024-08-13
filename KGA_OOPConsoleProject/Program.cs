@@ -4,6 +4,8 @@
     {
         static void Main(string[] args)
         {
+            GameData game = new GameData();
+            game.Run();
 
         }
     }

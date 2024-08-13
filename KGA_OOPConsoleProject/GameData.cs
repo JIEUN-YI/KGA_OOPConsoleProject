@@ -1,4 +1,6 @@
 ﻿using KGA_OOPConsoleProject.Scenes;
+using KGA_OOPConsoleProject.Scenes.Adventure;
+using KGA_OOPConsoleProject.Scenes.Lesson;
 namespace KGA_OOPConsoleProject
 {
     //게임 데이터 클래스
@@ -22,7 +24,7 @@ namespace KGA_OOPConsoleProject
          * 스케쥴 카운팅 - int 타입 / 스케쥴 카운팅 3번 = 현재 플레이 일수++
          */
         // 게임데이터 클래스가 가지는 함수들
-        private void Run()
+        public void Run()
         {
             Start();
             while (isRunning)
@@ -39,16 +41,17 @@ namespace KGA_OOPConsoleProject
             isRunning = true;
             //열거형 마지막 부분에 Size를 추가하여 열거형의 갯수만큼 배열 생성
             scenes = new Scene[(int)SceneType.Size];
-            scenes[(int)SceneType.Title] = new Scene(this);
-            scenes[(int)SceneType.Select] = new Scene();
-            scenes[(int)SceneType.Room] = new Scene();
-            scenes[(int)SceneType.Shop] = new Scene();
-            scenes[(int)SceneType.School] = new Scene();
-            scenes[(int)SceneType.Manner] = new Scene();
-            scenes[(int)SceneType.Music] = new Scene();
-            scenes[(int)SceneType.VillageMt] = new Scene();
-            scenes[(int)SceneType.DeepRiver] = new Scene();
-            scenes[(int)SceneType.DarkForest] = new Scene();
+            scenes[(int)SceneType.Title] = new TitleScene(this);
+            scenes[(int)SceneType.Select] = new SelectScene(this);
+            scenes[(int)SceneType.Room] = new RoomScene(this);
+            scenes[(int)SceneType.Shop] = new ShopScene(this);
+            scenes[(int)SceneType.Training] = new TrainingScene(this);
+            scenes[(int)SceneType.School] = new SchoolScene(this);
+            scenes[(int)SceneType.Manner] = new MannerScene(this);
+            scenes[(int)SceneType.Music] = new MusicScene(this);
+            scenes[(int)SceneType.VillageMt] = new VillageMtScene(this);
+            scenes[(int)SceneType.DeepRiver] = new DeepRiverScene(this);
+            scenes[(int)SceneType.DarkForest] = new DarkForestScene(this);
 
             nowScene = scenes[(int)SceneType.Title];
             nowScene.Enter();

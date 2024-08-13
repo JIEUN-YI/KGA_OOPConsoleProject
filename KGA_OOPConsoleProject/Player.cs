@@ -6,7 +6,7 @@ namespace KGA_OOPConsoleProject
     {
         // 플레이어가 필요로 하는 변수
         public GameData game;
-        private string name;
+        public string name;
         private TitleType[] titleTypes;
         private int money;
         public List<Item> inventory = new List<Item>(16);
@@ -34,6 +34,18 @@ namespace KGA_OOPConsoleProject
 
 
         // 플레이어가 사용하는 함수
+        public Player()
+        {
+            money = 500;
+            maxHp = 10;
+            ATK = 0;
+            DEF = 0;
+            mCount = 0;
+            str = 0;
+            INT = 0;
+            manner = 0;
+            sensi = 0;
+        }
         private void ShowStatus()
         {
             // 스테이터스의 범위 지정
@@ -68,7 +80,7 @@ namespace KGA_OOPConsoleProject
             {
                 Console.WriteLine($"{i + 1}. {Inventory[i].name}");
                 Console.WriteLine($"{Inventory[i].type,+4}");
-                Console.WriteLine($"{Inventory[i].effect,+4}");
+                //Console.WriteLine($"{Inventory[i].effect,+4}");
                 Console.WriteLine($"{Inventory[i].cost,+4}");
                 Console.WriteLine(" ===================================== ");
                 //name - string 타입 아이템 이름 type -Items 아이템 열거형 타입

@@ -11,7 +11,8 @@ namespace KGA_OOPConsoleProject.Scenes
     {
         // 사용하는 변수
         // GameData game 으로 불러오기
-        private GameData game;
+        protected GameData game;
+        protected Player player;
 
         // 장면을 생성하는 경우 무조건 GameData 변수가 필요함 - 생성자 생성
         public Scene(GameData game)

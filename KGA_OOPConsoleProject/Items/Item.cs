@@ -7,7 +7,7 @@ using System.Threading.Tasks;
  * 아이템의 종류별로 아이템의 사용 함수가 다르고 아이템 사용 효과가 아이템에 저장되어야 하는데,
  * 1. 아이템을 부모추상클래스로 작성하는 경우
  *    - 아이템의 타입이 방어구나 무기 인 경우 장착함수를 사용하고
- *    - 소모품인 경우 사용함수를 사용해야하기 때문에 추상함수로 작성하는 것이 올바르지 않음
+ *    - 소모품인 경우 사용함수를 사용해야하기 때문에 추상함수로 작성하는 것이 곤란함
  * 2. 아이템을 일반 클래스로 작성 후 필요한 만큼 생성하는 경우
  *    - 각 아이템 별 변수를 저장하는 것이 힘들고
  *    - 아이템 별 사용/장착효과를 변수가 아닌 함수에 작성해야하나 이 또한 아이템 별로 공통점을 만들어서
@@ -17,6 +17,7 @@ using System.Threading.Tasks;
  *    효율적이지 않은 것 같기도...
  * 3. 아이템 효과도 아이템 클래스에서 들어가야할 것 같은데... 변수로 넣기에는 변수 타입이 애매하고
  *    함수? 제작?
+ * 
  */
 namespace KGA_OOPConsoleProject.Items
 {
@@ -27,6 +28,7 @@ namespace KGA_OOPConsoleProject.Items
         public string name;
         public ItemsType type;
         public int cost;
+
         /*
          * name - string 타입 아이템 이름
          * type - Items 아이템 열거형 타입
