@@ -1,4 +1,6 @@
 ﻿using KGA_OOPConsoleProject.Items;
+using KGA_OOPConsoleProject.Scenes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KGA_OOPConsoleProject
 {
@@ -46,7 +48,7 @@ namespace KGA_OOPConsoleProject
             manner = 0;
             sensi = 0;
         }
-        public void ShowStatus()
+        public void ShowStatus(GameData game)
         {
 
             // 스테이터스의 범위 지정
@@ -59,7 +61,7 @@ namespace KGA_OOPConsoleProject
             Math.Clamp(INT, 0, 999);
             Math.Clamp(manner, 0, 999);
             Math.Clamp(sensi, 0, 999);
-
+            Console.Clear();
             Console.WriteLine(" === 상태창 ========================== ");
             Console.WriteLine($" 이름 : {name,+2}");
             Console.WriteLine($" 체력   : {maxHp,+2}");
@@ -73,7 +75,7 @@ namespace KGA_OOPConsoleProject
             Console.WriteLine($" 소지금 : {money,+2}G");
             Console.WriteLine(" ===================================== ");
             Console.WriteLine("     돌아가려면 아무키나 누르세요      ");
-            Console.ReadKey();
+            //Console.ReadKey();
             game.nowScene.Enter();
         }
         private void ShowInventory(List<Item> Inventory)

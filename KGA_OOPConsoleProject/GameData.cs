@@ -9,11 +9,11 @@ namespace KGA_OOPConsoleProject
         // 게임데이터 클래스가 가지는 변수들
         private bool isRunning;
         private Player player;
-        private Scene[] scenes;
+        public Scene[] scenes;
         public Scene nowScene;
         private int allDay;
-        private int nowDay;
-        private int sCount;
+        public int nowDay = 1;
+        public int sCount;
         /* 
          * 게임의 진행 여부 - bool 타입
          * 플레이어 - Player 타입
@@ -39,7 +39,8 @@ namespace KGA_OOPConsoleProject
         private void Start()
         {
             isRunning = true;
-            Player player = new Player();
+            Player player = new Player(); // 플레이어를 생성
+            GameData game = new GameData();// 게임데이터 생성
             //열거형 마지막 부분에 Size를 추가하여 열거형의 갯수만큼 배열 생성
             scenes = new Scene[(int)SceneType.Size];
             scenes[(int)SceneType.Title] = new TitleScene(this, player);
@@ -53,7 +54,7 @@ namespace KGA_OOPConsoleProject
             scenes[(int)SceneType.VillageMt] = new VillageMtScene(this, player);
             scenes[(int)SceneType.DeepRiver] = new DeepRiverScene(this, player);
             scenes[(int)SceneType.DarkForest] = new DarkForestScene(this, player);
-
+            scenes[(int)SceneType.SelectSchedule] = new SelectScheduleScene(this, player);
             nowScene = scenes[(int)SceneType.Title];
             nowScene.Enter();
         }

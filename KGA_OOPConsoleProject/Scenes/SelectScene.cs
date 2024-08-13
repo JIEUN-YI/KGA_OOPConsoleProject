@@ -21,6 +21,7 @@ namespace KGA_OOPConsoleProject.Scenes
         }
         public override void Enter()
         {
+            game.nowScene = this;
             nowState = State.name;
         }
         public override void Render()
