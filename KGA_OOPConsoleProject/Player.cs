@@ -7,19 +7,19 @@ namespace KGA_OOPConsoleProject
         // 플레이어가 필요로 하는 변수
         public GameData game;
         public string name;
-        private TitleType[] titleTypes;
-        private int money;
+        public TitleType[] titleTypes;
+        public int money;
         public List<Item> inventory = new List<Item>(16);
-        private Item[] equip = new Item[2];
-        private int maxHp;
-        private int nowMp;
-        private int ATK;
-        private int DEF;
-        private int mCount;
-        private int str;
-        private int INT;
-        private int manner;
-        private int sensi;
+        public Item[] equip = new Item[2];
+        public int maxHp;
+        public int nowMp;
+        public int ATK;
+        public int DEF;
+        public int mCount;
+        public int str;
+        public int INT;
+        public int manner;
+        public int sensi;
         /* 이름 - string 타입
          * title - Title[] 열거형 타입 / 업적은 여러개를 가질 수 있음
          * money - int 타입
@@ -46,8 +46,9 @@ namespace KGA_OOPConsoleProject
             manner = 0;
             sensi = 0;
         }
-        private void ShowStatus()
+        public void ShowStatus()
         {
+
             // 스테이터스의 범위 지정
             Math.Clamp(money, 0, 99999999);
             Math.Clamp(maxHp, 0, 999);
@@ -60,6 +61,7 @@ namespace KGA_OOPConsoleProject
             Math.Clamp(sensi, 0, 999);
 
             Console.WriteLine(" === 상태창 ========================== ");
+            Console.WriteLine($" 이름 : {name,+2}");
             Console.WriteLine($" 체력   : {maxHp,+2}");
             Console.WriteLine($" 공격력 : {ATK,+2}");
             Console.WriteLine($" 방어력 : {DEF,+2}");

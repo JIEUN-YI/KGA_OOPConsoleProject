@@ -7,4 +7,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Scenes\Adventure\**" />
+    <Compile Remove="Scenes\Lesson\**" />
+    <EmbeddedResource Remove="Scenes\Adventure\**" />
+    <EmbeddedResource Remove="Scenes\Lesson\**" />
+    <None Remove="Scenes\Adventure\**" />
+    <None Remove="Scenes\Lesson\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Scenes\RoomScene.cs" />
+    <Compile Remove="Scenes\ShopScene.cs" />
+  </ItemGroup>
+
 </Project>
