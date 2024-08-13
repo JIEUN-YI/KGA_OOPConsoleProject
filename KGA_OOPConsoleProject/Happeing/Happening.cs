@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using KGA_OOPConsoleProject.Scenes;
 namespace KGA_OOPConsoleProject.Happeing
 {
     // 각종 돌발이벤트 추상 클래스
@@ -12,12 +12,19 @@ namespace KGA_OOPConsoleProject.Happeing
     public abstract class Happening
     {
         // 돌발이벤트에서 사용하는 공통 변수
+        Player player;
+        GameData nowScene;
         /*
          * Player player - 플레이어의 정보를 사용하기 위함
-         * Scenes curScene - 현재 장면 정보
+         * GameData nowScene - 현재 장면 정보
          */
 
         // 추상클래스 사용 함수
+        public abstract void Render();
+        public abstract void Input();
+        public abstract void Update();
+        public abstract void Exit();
+
         /* 
          * public abstract void Render(); - 각 돌발이벤트의 내용 출력
          * public abstract void Input(); - 각 돌발이벤트 선택지 선택

@@ -10,6 +10,13 @@ namespace KGA_OOPConsoleProject.Monsters
     public abstract class Monster
     {
         // 몬스터가 가지는 변수
+        string name;
+        int MaxHp;
+        int nowMp;
+        int ATK;
+        int DEF;
+        int level;
+        SceneType sceneType;
         /* 
          * 이름 - string 타입
          * MaxHp - int형 최대 체력
@@ -20,6 +27,8 @@ namespace KGA_OOPConsoleProject.Monsters
          * 출몰장소 - Scenes 열거형 타입
          */
         // 몬스터가 가지는 함수
+        public abstract void MosterEnter();
+        public abstract void MonsterBattle();
         /*
          * MonsterEnter() - 몬스터 등장 함수
          * MonsterBattle() - 몬스터와의 전투 함수

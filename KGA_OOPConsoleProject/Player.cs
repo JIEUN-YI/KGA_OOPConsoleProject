@@ -9,7 +9,7 @@ namespace KGA_OOPConsoleProject
         private string name;
         private TitleType[] titleTypes;
         private int money;
-        private List<Item> inventory = new List<Item>(16);
+        public List<Item> inventory = new List<Item>(16);
         private Item[] equip = new Item[2];
         private int maxHp;
         private int nowMp;
@@ -71,7 +71,8 @@ namespace KGA_OOPConsoleProject
                 Console.WriteLine($"{Inventory[i].effect,+4}");
                 Console.WriteLine($"{Inventory[i].cost,+4}");
                 Console.WriteLine(" ===================================== ");
-                //name - string 타입 아이템 이름 type -Items 아이템 열거형 타입 effect -아이템 사용 효과 cost - 아이템 구매 비용*/
+                //name - string 타입 아이템 이름 type -Items 아이템 열거형 타입
+                //effect -아이템 사용 효과 cost - 아이템 구매 비용*/
             }
         }
         private void PlayerDead()

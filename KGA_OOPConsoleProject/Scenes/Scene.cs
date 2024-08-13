@@ -11,9 +11,20 @@ namespace KGA_OOPConsoleProject.Scenes
     {
         // 사용하는 변수
         // GameData game 으로 불러오기
+        private GameData game;
+
         // 장면을 생성하는 경우 무조건 GameData 변수가 필요함 - 생성자 생성
+        public Scene(GameData game)
+        {
+            this.game = game;
+        }
 
         // 각 장면에서 사용하는 함수
+        public abstract void Enter();
+        public abstract void Render();
+        public abstract void Input();
+        public abstract void Update();
+        public abstract void Exit();
         /*
          * Enter() - 장면에 입장
          * Render(); - 장면을 그리고
