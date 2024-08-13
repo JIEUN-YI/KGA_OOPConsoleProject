@@ -3,26 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/* 질문 
- * 아이템의 종류별로 아이템의 사용 함수가 다르고 아이템 사용 효과가 아이템에 저장되어야 하는데,
- * 1. 아이템을 부모추상클래스로 작성하는 경우
- *    - 아이템의 타입이 방어구나 무기 인 경우 장착함수를 사용하고
- *    - 소모품인 경우 사용함수를 사용해야하기 때문에 추상함수로 작성하는 것이 곤란함
- * 2. 아이템을 일반 클래스로 작성 후 필요한 만큼 생성하는 경우
- *    - 각 아이템 별 변수를 저장하는 것이 힘들고
- *    - 아이템 별 사용/장착효과를 변수가 아닌 함수에 작성해야하나 이 또한 아이템 별로 공통점을 만들어서
- *    - 제작하기가 힘듦
- * => 이런 경우 부모추상클래스로 아이템을 제작하는 것이 아니라 소모품아이템 부모추상클래스, 
- *    방어구/무기아이템 부모추상클래스로 나누어서 부모추상클래스를 작성하는 방법을 생각해봤는데, 
- *    효율적이지 않은 것 같기도...
- * 3. 아이템 효과도 아이템 클래스에서 들어가야할 것 같은데... 변수로 넣기에는 변수 타입이 애매하고
- *    함수? 제작?
- * 
- */
+
 namespace KGA_OOPConsoleProject.Items
 {
     // 아이템 생성 클래스
-    public class Item
+    public abstract class Item
     {
         // 아이템 사용 변수
         public string name;
@@ -32,11 +17,15 @@ namespace KGA_OOPConsoleProject.Items
         /*
          * name - string 타입 아이템 이름
          * type - Items 아이템 열거형 타입
-         * effect - 아이템 사용 효과
          * cost - 아이템 구매 비용
          */
 
         // 아이템 별 사용 함수 - 상속으로 아이템의 변수를 상속받게 해서 아이템 종류를 제작 후 알맞은 함수 사용
+        public abstract void UseItem();
+
+        public abstract void EquipItem();
+
+        public abstract void ShowItemEffect();
         /*
          * UseItem() - 인벤토리의 소모품 아이템(supplies)을 사용하는 함수
          *             보통 room에서 사용하거나 전투 중 소모품 사용
@@ -44,6 +33,8 @@ namespace KGA_OOPConsoleProject.Items
          * EquipItem() - 인벤토리의 무기(weapon) 또는 방어구(device)를 착용하는 함수
          *               room에서 착용 가능 / 그 외 장소 불가
          *               무기나 방어구의 착용에 따라 능력치의 증감발생
+         *               
+         * ShowItemEffect() - 아이템의 효과를 보여주는 함수
          */
     }
 }

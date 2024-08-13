@@ -80,11 +80,10 @@ namespace KGA_OOPConsoleProject
             {
                 Console.WriteLine($"{i + 1}. {Inventory[i].name}");
                 Console.WriteLine($"{Inventory[i].type,+4}");
-                //Console.WriteLine($"{Inventory[i].effect,+4}");
                 Console.WriteLine($"{Inventory[i].cost,+4}");
                 Console.WriteLine(" ===================================== ");
                 //name - string 타입 아이템 이름 type -Items 아이템 열거형 타입
-                //effect -아이템 사용 효과 cost - 아이템 구매 비용*/
+                //cost - 아이템 구매 비용*/
             }
         }
         private void PlayerDead()
