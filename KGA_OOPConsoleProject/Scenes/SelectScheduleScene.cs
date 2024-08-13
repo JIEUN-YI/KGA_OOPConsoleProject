@@ -12,7 +12,7 @@
         }
         public override void Enter()
         {
-            nowState = State.one;
+
         }
         public override void Render()
         {
@@ -142,6 +142,7 @@
                     break;
                 case State.finish:
                     game.nowDay++; // 하루가 끝나면 nowDay++
+                    nowState = State.one;
                     if (game.nowDay == game.allDay) // 전체 일수와 같아지면
                     {
                         game.ChangeScene(SceneType.Ending); //엔딩씬으로 이동

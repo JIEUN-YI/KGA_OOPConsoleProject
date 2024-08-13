@@ -34,6 +34,7 @@ namespace KGA_OOPConsoleProject.Scenes
             }
             else if (nowState == State.Confirm)
             {
+                Console.Clear();
                 Console.WriteLine(" === 상태창 ========================== ");
                 Console.WriteLine($" 이름 : {player.name,+2}");
                 Console.WriteLine($" 체력   : {player.maxHp,+2}");
