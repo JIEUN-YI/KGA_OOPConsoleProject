@@ -11,9 +11,8 @@ namespace KGA_OOPConsoleProject
         private Player player;
         public Scene[] scenes;
         public Scene nowScene;
-        private int allDay;
+        public int allDay = 3; //검사용
         public int nowDay = 1;
-        public int sCount;
         /* 
          * 게임의 진행 여부 - bool 타입
          * 플레이어 - Player 타입
@@ -55,6 +54,8 @@ namespace KGA_OOPConsoleProject
             scenes[(int)SceneType.DeepRiver] = new DeepRiverScene(this, player);
             scenes[(int)SceneType.DarkForest] = new DarkForestScene(this, player);
             scenes[(int)SceneType.SelectSchedule] = new SelectScheduleScene(this, player);
+            scenes[(int)SceneType.AdventureSelect] = new AdventureSelectScene(this, player);
+            scenes[(int)SceneType.Ending] = new EndingScene(this, player);
             nowScene = scenes[(int)SceneType.Title];
             nowScene.Enter();
         }

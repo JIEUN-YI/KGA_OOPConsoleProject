@@ -10,7 +10,8 @@ namespace KGA_OOPConsoleProject
     // 장면 열거형
     public enum SceneType
     {
-        Title, Select, Room, Shop, Training, School, Manner, Music, VillageMt, DeepRiver, DarkForest, SelectSchedule, Size
+        Title, Select, Room, Shop, Training, School, Manner, Music, VillageMt, DeepRiver, DarkForest, 
+        SelectSchedule, AdventureSelect, Ending, Size
     }
     /*
      * Title(게임시작 타이틀화면) , Select(게임정보 입력화면), 

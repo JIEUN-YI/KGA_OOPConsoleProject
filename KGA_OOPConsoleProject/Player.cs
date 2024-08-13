@@ -35,8 +35,7 @@ namespace KGA_OOPConsoleProject
          */
 
 
-        // 플레이어가 사용하는 함수
-        public Player()
+        public Player() // 플레이어 생성자 - 플레이어 기본 값
         {
             money = 500;
             maxHp = 10;
@@ -48,7 +47,12 @@ namespace KGA_OOPConsoleProject
             manner = 0;
             sensi = 0;
         }
-        public void ShowStatus(GameData game)
+        // 플레이어가 사용하는 함수
+        /// <summary>
+        /// 스탯을 정리하여 보여주는 함수
+        /// </summary>
+        /// <param name="game"></param>
+        public void ShowStatus(GameData game) 
         {
 
             // 스테이터스의 범위 지정
@@ -63,16 +67,16 @@ namespace KGA_OOPConsoleProject
             Math.Clamp(sensi, 0, 999);
             Console.Clear();
             Console.WriteLine(" === 상태창 ========================== ");
-            Console.WriteLine($" 이름 : {name,+2}");
-            Console.WriteLine($" 체력   : {maxHp,+2}");
-            Console.WriteLine($" 공격력 : {ATK,+2}");
-            Console.WriteLine($" 방어력 : {DEF,+2}");
-            Console.WriteLine($" 무술능력 : {str,+2}");
-            Console.WriteLine($" 지력   : {INT,+2}");
-            Console.WriteLine($" 예법   : {manner,+2}");
-            Console.WriteLine($" 감수성 : {sensi,+2}");
-            Console.WriteLine($" 사냥한 몬스터 수 : {mCount,+2}");
-            Console.WriteLine($" 소지금 : {money,+2}G");
+            Console.WriteLine($" 이름 : {name,-2}");
+            Console.WriteLine($" 체력   : {maxHp,-2}");
+            Console.WriteLine($" 공격력 : {ATK,-2}");
+            Console.WriteLine($" 방어력 : {DEF,-2}");
+            Console.WriteLine($" 무술능력 : {str,-2}");
+            Console.WriteLine($" 지력   : {INT,-2}");
+            Console.WriteLine($" 예법   : {manner,-2}");
+            Console.WriteLine($" 감수성 : {sensi,-2}");
+            Console.WriteLine($" 사냥한 몬스터 수 : {mCount,-2}");
+            Console.WriteLine($" 소지금 : {money,-2}G");
             Console.WriteLine(" ===================================== ");
             Console.WriteLine("     돌아가려면 아무키나 누르세요      ");
             //Console.ReadKey();

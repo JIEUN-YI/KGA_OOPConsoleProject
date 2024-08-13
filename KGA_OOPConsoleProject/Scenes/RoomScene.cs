@@ -2,8 +2,8 @@
 {
     public class RoomScene : Scene
     {
-        // 현재 상태가 기본 / 스케쥴 선택 / 상점 가기 선택 / 상태보기 선택
-        public enum State { normal, Scehdule, Shop, Status }
+        // 현재 상태가 기본 / 상태보기 / 인벤토리 열기 선택
+        public enum State { normal, Status, Inventory }
         public State nowState;
         private string input;
         public RoomScene(GameData game, Player player) : base(game, player)
@@ -30,15 +30,8 @@
                 Console.WriteLine(" 1. 스케쥴 수행하기");
                 Console.WriteLine(" 2. 상점가기");
                 Console.WriteLine(" 3. 상태보기");
+                // 아이템 구현 후 인벤토리 보기 구현예정
                 Console.Write(" 선택 : ");
-            }
-            else if (nowState == State.Scehdule)
-            {
-                game.ChangeScene(SceneType.SelectSchedule);
-            }
-            else if (nowState == State.Shop)
-            {
-                game.ChangeScene(SceneType.Shop);
             }
             else if (nowState == State.Status)
             {
@@ -56,13 +49,13 @@
                 switch (input)
                 {
                     case "1":
-                        nowState = State.Scehdule;
+                        game.ChangeScene(SceneType.SelectSchedule);
                         break;
                     case "2":
-                        nowState= State.Shop;
+                        game.ChangeScene(SceneType.Shop);
                         break;
                     case "3":
-                        nowState=State.Status;
+                        nowState = State.Status;
                         break;
                     default:
                         break;
