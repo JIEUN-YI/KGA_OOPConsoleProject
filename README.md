@@ -33,9 +33,9 @@
 
 - Monsters 부모추상클래스 작성
 
+- Happening 부모추상클래스 작성 **Add Scenes / Monsters / Happeing 24.08.13 커밋 완료**
+  
 - Items 부모추상클래스 작성
-
-- Happening 부모추상클래스 작성
 
 - Scenes 자식클래스 작성
 
