@@ -45,17 +45,25 @@
 
 3일차(14일)
 
-- Monsters 자식클랙스 작성
+- Monsters 자식클랙스 작성 **Add monsters 24.08.14 커밋 완료**
 
-- Items 자식클래스 작성
+~~- Happening 자식클래스 작성~~
   
-- Happening 자식클래스 작성
+- Adventure 기능 완성하기 **일부 기능 24.08.14 커밋 완료**
+
+~~- Items 자식클래스 작성~~
   
 - 버그 픽스
   
 ~~- Map 기능 제작~~
   
 4일차(15일)
+
+- Happening 자식클래스 작성
+  
+- Adventure 기능 완성하기
+
+- Items 자식클래스 작성
 
 ~~- Map 기능 완성하기~~
   
