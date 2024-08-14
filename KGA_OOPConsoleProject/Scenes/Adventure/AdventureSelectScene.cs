@@ -37,7 +37,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     Console.WriteLine(" ===================================== ");
                     Console.WriteLine(" 집으로 돌아갑니다.");
                     Console.WriteLine(" ===================================== ");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2000);
                     break;
             }
         }
@@ -76,7 +76,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     break;
                 case State.finish:
                     nowState = State.select;
-                    game.ChangeScene(SceneType.SelectSchedule); //엔딩씬으로 이동
+                    game.ChangeScene(SceneType.SelectSchedule);
                     break;
                 default:
                     break;

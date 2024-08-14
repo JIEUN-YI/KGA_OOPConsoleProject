@@ -1,5 +1,6 @@
 ﻿using KGA_OOPConsoleProject.Items;
 using KGA_OOPConsoleProject.Monsters;
+using System.Threading;
 
 namespace KGA_OOPConsoleProject
 {
@@ -8,7 +9,7 @@ namespace KGA_OOPConsoleProject
         // 플레이어가 필요로 하는 변수
         public GameData game;
         public string name;
-        public TitleType[] titleTypes;
+        public TitleType[] playerTitle = new TitleType[3];
         public int money;
         public List<Item> inventory = new List<Item>(16);
         public Item[] equip = new Item[2];
@@ -21,6 +22,8 @@ namespace KGA_OOPConsoleProject
         public int INT;
         public int manner;
         public int sensi;
+
+        Random ran = new Random();
         /* 이름 - string 타입
          * title - Title[] 열거형 타입 / 업적은 여러개를 가질 수 있음
          * money - int 타입
@@ -38,7 +41,8 @@ namespace KGA_OOPConsoleProject
         {
             money = 500;
             maxHp = 10;
-            ATK = 0;
+            nowHp = maxHp;
+            ATK = 50;
             DEF = 0;
             mCount = 0;
             str = 0;
@@ -101,21 +105,70 @@ namespace KGA_OOPConsoleProject
         /// </summary>
         /// <param name="player"></param>
         /// <param name="monster"></param>
-        public int PlayerAttack(Player player, Monster monster)
+        public void PlayerAttack(Player player, Monster monster)
         {
             int playerAttack = (int)(player.ATK - monster.DEF * 0.5);
+            playerAttack = Math.Clamp(playerAttack, 0, 999);
+            Console.Clear();
+            Console.WriteLine(" ===================================== ");
+            Console.WriteLine($" {player.name}은(는) 힘껏 공격했다!");
+            Console.WriteLine($" {playerAttack}의 데미지를 입혔다.");
+            Console.WriteLine(" ===================================== ");
+            Thread.Sleep(2000);
             monster.nowHp -= playerAttack;
-            return monster.nowHp;
         }
-        public void CheckPlayerDead(Player player)
+        /// <summary>
+        /// 플레이어의 생존 여부 확인 함수
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="monster"></param>
+        /// <returns></returns>
+        public bool PlayerLive(Player player, Monster monster)
         {
-            if (nowHp <= 0)
+            bool result = true; //생존
+            if (player.nowHp <= 0)
             {
-                game.ChangeScene(SceneType.Room);
+                player.nowHp = 0;
+                result = false;//사망
+                return result;
             }
 
-
+            return false;
         }
+       /// <summary>
+       /// 플레이어의 도망 함수
+       /// </summary>
+       /// <param name="player"></param>
+       /// <param name="monster"></param>
+       /// <returns></returns>
+        public int PlayerRun(Player player, Monster monster)
+        {
+            int num = ran.Next(0, 2);
+            switch (num)
+            {
+                case 0:
+                    Console.Clear();
+                    Console.WriteLine(" ===================================== ");
+                    Console.WriteLine(" 도망에 실패했다!");
+                    Console.WriteLine(" ===================================== ");
+                    Console.WriteLine($" {monster.name}이(가) 공격을 시도한다!");
+                    Console.WriteLine($"{(int)(monster.ATK - player.DEF * 0.5)}의 데미지를 입었다.");
+                    monster.MonsterAttack(player, monster);
+                    Console.WriteLine(" ===================================== ");
+                    Thread.Sleep(3000);
+                    return num;
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine(" ===================================== ");
+                    Console.WriteLine(" \"휴~\"");
+                    Console.WriteLine(" 무사히 도망에 성공했다.");
+                    Console.WriteLine(" ===================================== ");
+                    Thread.Sleep(3000);
+                    return num;
+            }
+            return num;
+        }
+
 
         /*
          * ShowStatus() - 플레이어의 현재 스탯을 보여주는 함수 / Math.Clamp를 사용하여 최소값과 최대값을 지정

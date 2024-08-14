@@ -1,6 +1,7 @@
 ﻿using KGA_OOPConsoleProject.Scenes;
 using KGA_OOPConsoleProject.Scenes.Adventure;
 using KGA_OOPConsoleProject.Scenes.Lesson;
+using System.Collections.Generic;
 /* 코멘트
  * Adcenture폴더 속 Scene들에서 공통적으로 사용하는 Move함수들을 GameData에서 일괄로 구현해보려고 했으나 실패
  * 조금 더 연구가 필요함
@@ -15,6 +16,7 @@ namespace KGA_OOPConsoleProject
         private Player player;
         public Scene[] scenes;
         public Scene nowScene;
+        public Scene preScene; // 이전 장면 저장용
         public int allDay = 10; //검사용 // 임시기간 - 게임 기간과 최대 능력치는 조절 필수
         public int nowDay = 1;
         /* 
@@ -45,6 +47,8 @@ namespace KGA_OOPConsoleProject
             isRunning = true;
             Player player = new Player(); // 플레이어를 생성
             GameData game = new GameData();// 게임데이터 생성
+            List<TitleType> title = new List<TitleType>(3);
+
             //열거형 마지막 부분에 Size를 추가하여 열거형의 갯수만큼 배열 생성
             scenes = new Scene[(int)SceneType.Size];
             scenes[(int)SceneType.Title] = new TitleScene(this, player);
@@ -60,6 +64,8 @@ namespace KGA_OOPConsoleProject
             scenes[(int)SceneType.DarkForest] = new DarkForestScene(this, player);
             scenes[(int)SceneType.SelectSchedule] = new SelectScheduleScene(this, player);
             scenes[(int)SceneType.AdventureSelect] = new AdventureSelectScene(this, player);
+            scenes[(int)SceneType.MonsterBattle] = new MonsterBattleScene(this, player);
+            scenes[(int)SceneType.BossBattle] = new BossBattleScene(this, player);
             scenes[(int)SceneType.Ending] = new EndingScene(this, player);
             nowScene = scenes[(int)SceneType.Title];
             nowScene.Enter();

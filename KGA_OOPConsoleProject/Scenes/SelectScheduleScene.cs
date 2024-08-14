@@ -47,6 +47,7 @@
                     Console.WriteLine(" ===================================== ");
                     Console.WriteLine(" 하루가 저물고 있습니다.");
                     Console.WriteLine(" ===================================== ");
+                    Thread.Sleep(2000);
                     break;
             }
         }

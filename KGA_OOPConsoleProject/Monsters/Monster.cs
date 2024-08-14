@@ -1,10 +1,10 @@
 ﻿using System.Numerics;
 using System.Reflection.Metadata;
 /* 코멘트
- * MonsterBattle() 함수 추상화가 아니라
- * PlayAttack()함수 / MonsterAttack()함수 를 따로 작성하고
- * 그걸 이용해서 MosterBattle()함수를 작성하는 것이 Scene에서 사용하기 용이할 것 같음
- * 추상화에 대해 조금 더 고민할 것
+ * Monster()를 상속받는 BossMonster()/FieldMonster()를 제작하여
+ * 그 안에서 보스몬스터와 필드몬스터를 생성하려고 하였으나
+ * BattleScene 으로 불러내는 것에 실패함
+ * 우선 보스몬스터 3종을 작성해두었으니 필드몬스터는 불러오는 것으로 생각해보기
  */
 namespace KGA_OOPConsoleProject.Monsters
 {
@@ -25,15 +25,9 @@ namespace KGA_OOPConsoleProject.Monsters
         Player player;
         GameData game;
 
-        public Monster(string name, int maxHp, int ATK, int DEF, int level, State nowState)
+        public Monster()
         {
-            this.name = name;
-            this.maxHp = maxHp;
-            this.nowState = nowState;
-            this.ATK = ATK;
-            this.DEF = DEF;
-            this.level = level;
-            this.nowState = nowState;
+
         }
         /* 
          * 이름 - string 타입
@@ -50,12 +44,25 @@ namespace KGA_OOPConsoleProject.Monsters
         /// </summary>
         /// <param name="player"></param>
         /// <param name="monster"></param>
-        public int MonsterAttack(Player player, Monster monster)
+        public void MonsterAttack(Player player, Monster monster)
         {
             int monsterAttack = (int)(monster.ATK - player.DEF * 0.5);
+            Console.WriteLine($" {monster.name}이(가) 반격을 시도한다!");
+            Console.WriteLine($" {monsterAttack}의 데미지를 입었다.");
+            Console.WriteLine(" ===================================== ");
+            Thread.Sleep(2000);
             player.nowHp -= monsterAttack;
-            return player.nowHp;
         }
+        public bool MonsterLive(Player player, Monster monster)
+        {
+           bool result = true; //생존
+           if(monster.nowHp <= 0)
+            {
+                monster.nowHp = 0;
+                result = false; //사망
+            }
+            return result;
 
+        }
     }
 }
