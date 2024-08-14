@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Monsters\DeepM\" />
+    <Folder Include="Monsters\DarkM\" />
+  </ItemGroup>
+
 </Project>

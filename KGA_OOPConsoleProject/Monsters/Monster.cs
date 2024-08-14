@@ -3,8 +3,9 @@ using System.Reflection.Metadata;
 /* 코멘트
  * Monster()를 상속받는 BossMonster()/FieldMonster()를 제작하여
  * 그 안에서 보스몬스터와 필드몬스터를 생성하려고 하였으나
- * BattleScene 으로 불러내는 것에 실패함
- * 우선 보스몬스터 3종을 작성해두었으니 필드몬스터는 불러오는 것으로 생각해보기
+ * BattleScene으로 불러내는 것에 실패함
+ * 몬스터를 구조체로 사용할까 하였으나 부모클래스인 Monster()에 있는 함수 사용이 필요함
+ * => 각 맵 폴더 안에 각각의 몬스터를 클래스로 종류별로 구현
  */
 namespace KGA_OOPConsoleProject.Monsters
 {
