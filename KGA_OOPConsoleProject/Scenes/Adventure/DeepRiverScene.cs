@@ -64,11 +64,11 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         public override void Update()
         {
             playerPos = AdventureManager.Move(inputKey, map, playerPos, BossMobPos);
-            AdventureManager.CheckReachBoss(playerPos, BossMobPos);
         }
         public override void Exit()
         {
 
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KGA_OOPConsoleProject.Monsters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,9 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
     //Adventure에 공통으로 들어갈 Move 함수 제작
     public interface AdventureManager
     {
+        public enum State { Start, Battle, Finish }
         public struct Point { public int x, y; } // 위치 표현을 하는 x, y 좌표
+
         #region 이동에 관련된 함수들
         /// <summary>
         /// 게임에서 플레이어의 이동
@@ -42,19 +45,6 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     return playerPos;
             }
             return playerPos;
-        }
-        /// <summary>
-        /// 보스의 방에 도달했는지 확인
-        /// 플레이어와 보스의 위치를 입력받아서 사용
-        /// </summary>
-        public static void CheckReachBoss(Point playerPos, Point BossMobPos)
-        {
-            if (playerPos.x == BossMobPos.x && playerPos.y == BossMobPos.y)
-            {
-                Console.Clear();//작동여부확인
-                Console.WriteLine("보스");
-                // 몬스터 배틀 시작
-            }
         }
 
         public static Point MoveUp(bool[,] map, Point playerPos, Point BossMobPos)
@@ -123,7 +113,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 Console.WriteLine();
             }
         }
-         /// <summary>
+        /// <summary>
         /// 플레이어의 위치를 표현하는 함수
         /// </summary>
         public static void PrintPlayer(Point playerPos)
@@ -144,6 +134,33 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             Console.ResetColor();
         }
         #endregion
+
+        #region 배틀에 관련된 함수들
+
+
+
+        /// <summary>
+        /// 보스의 방에 도달했는지 확인
+        /// 플레이어와 보스의 위치를 입력받아서 사용
+        /// </summary>
+
+        //public abstract void CheckReachBoss();
+
+        public static bool CheckReachBoss(Point playerPos, Point BossMobPos)
+        {
+            bool result = false;
+            if (playerPos.x == BossMobPos.x && playerPos.y == BossMobPos.y)
+            {
+                result = true;
+                return result;
+            }
+            return result;
+        }
+
+        // 몬스터 배틀 시작*/
+
+        #endregion
+
     }
 }
 

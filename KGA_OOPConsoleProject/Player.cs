@@ -1,6 +1,5 @@
 ﻿using KGA_OOPConsoleProject.Items;
-using KGA_OOPConsoleProject.Scenes;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using KGA_OOPConsoleProject.Monsters;
 
 namespace KGA_OOPConsoleProject
 {
@@ -14,7 +13,7 @@ namespace KGA_OOPConsoleProject
         public List<Item> inventory = new List<Item>(16);
         public Item[] equip = new Item[2];
         public int maxHp;
-        public int nowMp;
+        public int nowHp;
         public int ATK;
         public int DEF;
         public int mCount;
@@ -52,7 +51,7 @@ namespace KGA_OOPConsoleProject
         /// 스탯을 정리하여 보여주는 함수
         /// </summary>
         /// <param name="game"></param>
-        public void ShowStatus(GameData game) 
+        public void ShowStatus(GameData game)
         {
             money = Math.Clamp(money, 0, 99999999);
             maxHp = Math.Clamp(maxHp, 0, 100); // 임시제작 능력치 100 - 최대 능력치는 게임 기간 대비로 조절 필수
@@ -81,6 +80,10 @@ namespace KGA_OOPConsoleProject
             //Console.ReadKey();
             game.nowScene.Enter();
         }
+        /// <summary>
+        /// 인벤토리 구성 함수 - 추후 다시 구상하기
+        /// </summary>
+        /// <param name="Inventory"></param>
         private void ShowInventory(List<Item> Inventory)
         {
             for (int i = 0; i < Inventory.Count; i++)
@@ -93,13 +96,25 @@ namespace KGA_OOPConsoleProject
                 //cost - 아이템 구매 비용*/
             }
         }
-        private void PlayerDead()
+        /// <summary>
+        /// 플레이어가 몬스터를 공격하는 함수
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="monster"></param>
+        public int PlayerAttack(Player player, Monster monster)
         {
-            Console.WriteLine(" ===================================== ");
-            Console.WriteLine($" {name}이/가 체력이 0이 되었습니다. ");
-            Console.WriteLine(" 집으로 돌아갑니다. ");
-            Console.WriteLine(" ===================================== ");
-            game.ChangeScene(SceneType.Room);
+            int playerAttack = (int)(player.ATK - monster.DEF * 0.5);
+            monster.nowHp -= playerAttack;
+            return monster.nowHp;
+        }
+        public void CheckPlayerDead(Player player)
+        {
+            if (nowHp <= 0)
+            {
+                game.ChangeScene(SceneType.Room);
+            }
+
+
         }
 
         /*

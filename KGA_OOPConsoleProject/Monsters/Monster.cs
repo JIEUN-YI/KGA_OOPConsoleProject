@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Reflection.Metadata;
 /* 코멘트
  * MonsterBattle() 함수 추상화가 아니라
  * PlayAttack()함수 / MonsterAttack()함수 를 따로 작성하고
@@ -10,25 +11,29 @@ namespace KGA_OOPConsoleProject.Monsters
     // 몬스터 종류별로 가지고 있는 클래스 제작
     public abstract class Monster
     {
+        public enum State { Live, Dead }
         // 몬스터가 가지는 변수
         public string name;
-        private int maxHp;
+        public int maxHp;
         public int nowHp;
-        private int ATK;
-        private int DEF;
+        public int ATK;
+        public int DEF;
         public int level;
-        SceneType sceneType;
+
+        public State nowState;
 
         Player player;
+        GameData game;
 
-        public Monster(string name, int maxHp, int ATK, int DEF, int level, SceneType sceneType)
+        public Monster(string name, int maxHp, int ATK, int DEF, int level, State nowState)
         {
             this.name = name;
             this.maxHp = maxHp;
+            this.nowState = nowState;
             this.ATK = ATK;
             this.DEF = DEF;
             this.level = level;
-            this.sceneType = sceneType;
+            this.nowState = nowState;
         }
         /* 
          * 이름 - string 타입
@@ -40,14 +45,17 @@ namespace KGA_OOPConsoleProject.Monsters
          * 출몰장소 - Scenes 열거형 타입
          */
         // 몬스터가 가지는 함수
-        public void MosterEnter()
+        /// <summary>
+        /// 몬스터가 플레이어를 공격하는 함수
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="monster"></param>
+        public int MonsterAttack(Player player, Monster monster)
         {
-            Console.WriteLine($" 전방에 {name}이(가) 나타났다.");
+            int monsterAttack = (int)(monster.ATK - player.DEF * 0.5);
+            player.nowHp -= monsterAttack;
+            return player.nowHp;
         }
-        public abstract void MonsterBattle();
-        /*
-         * MonsterEnter() - 몬스터 등장 함수
-         * MonsterBattle() - 몬스터와의 전투 함수
-         */
+
     }
 }
