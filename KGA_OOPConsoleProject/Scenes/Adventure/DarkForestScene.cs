@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KGA_OOPConsoleProject.Monsters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,16 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 {
     public class DarkForestScene : Scene
     {
-        public enum State { Start, Live, Dead } // 시작, 살아있는 상태, 죽은 상태
-        public struct Point { public int x, y; } // 위치 표현을 하는 x, y 좌표
+        public enum State { Start, Battle, Boss, End } // 시작, 살아있는 상태, 죽은 상태
         public State nowState;
+
         Random ran = new Random(); // 랜덤을 사용
-        // 마을 뒷 산 맵을 그리기 위해 사용
+        // 맵을 그리기 위해 사용
         private bool[,] map;
         private ConsoleKey inputKey; // 입력키 저장
         private AdventureManager.Point playerPos; // 플레이어의 위치
         private AdventureManager.Point BossMobPos; // 보스 몬스터의 위치
+        public Monster monster;
         public DarkForestScene(GameData game, Player player) : base(game, player)
         {
 
@@ -50,18 +52,60 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         }
         public override void Render()
         {
-            Console.SetCursorPosition(0, 0); //맵의 깜빡임을 없애기 위한 커서 위치 이동
-            AdventureManager.PrintMap(map);
-            AdventureManager.PrintPlayer(playerPos);
-            AdventureManager.PrintBoss(BossMobPos);
+            switch (nowState)
+            {
+                case State.Start:
+                    Console.SetCursorPosition(0, 0); //맵의 깜빡임을 없애기 위한 커서 위치 이동
+                    AdventureManager.PrintMap(map);
+                    AdventureManager.PrintPlayer(playerPos);
+                    AdventureManager.PrintBoss(BossMobPos);
+                    break;
+
+                case State.Battle:
+                    break;
+                case State.Boss:
+                    //콘솔 클리어 후
+                    Console.Clear();
+                    break;
+                case State.End:
+                    break;
+            }
         }
         public override void Input()
         {
-            inputKey = Console.ReadKey(true).Key; // 미로이므로 화살표를 입력받아야 함
+            if (nowState == State.Start)
+            {
+                inputKey = Console.ReadKey(true).Key; // 미로이므로 화살표를 입력받아야 함
+            }
         }
         public override void Update()
         {
-            playerPos = AdventureManager.Move(inputKey, map, playerPos, BossMobPos);
+            switch (nowState)
+            {
+                case State.Start:
+                    playerPos = AdventureManager.Move(inputKey, map, playerPos, BossMobPos);
+                    if (AdventureManager.CheckReachBoss(playerPos, BossMobPos))
+                    {
+                        nowState = State.Boss;
+                    }
+                    //플레이어의 위치와 보스의 위치가 같으면
+                    //상태를 보스로 변경
+                    break;
+
+                case State.Battle:
+                    break;
+                case State.Boss:
+                    //보스 배틀 장면으로 이동
+                    game.preScene = game.nowScene;
+                    game.ChangeScene(SceneType.BossBattle);
+                    nowState = State.End;
+                    break;
+                case State.End:
+                    nowState = State.Start;
+                    game.ChangeScene(SceneType.AdventureSelect);
+                    break;
+
+            }
         }
         public override void Exit()
         {

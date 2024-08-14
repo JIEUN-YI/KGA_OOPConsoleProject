@@ -47,7 +47,6 @@ namespace KGA_OOPConsoleProject
             isRunning = true;
             Player player = new Player(); // 플레이어를 생성
             GameData game = new GameData();// 게임데이터 생성
-            List<TitleType> title = new List<TitleType>(3);
 
             //열거형 마지막 부분에 Size를 추가하여 열거형의 갯수만큼 배열 생성
             scenes = new Scene[(int)SceneType.Size];

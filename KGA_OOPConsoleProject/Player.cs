@@ -42,7 +42,7 @@ namespace KGA_OOPConsoleProject
             money = 500;
             maxHp = 10;
             nowHp = maxHp;
-            ATK = 50;
+            ATK = 0;
             DEF = 0;
             mCount = 0;
             str = 0;

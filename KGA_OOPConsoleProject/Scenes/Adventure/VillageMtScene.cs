@@ -20,7 +20,6 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         private AdventureManager.Point playerPos; // 플레이어의 위치
         private AdventureManager.Point BossMobPos; // 보스 몬스터의 위치
         public Monster monster;
-        //Monster bossMonster = new StrongTiger();
 
         public VillageMtScene(GameData game, Player player) : base(game, player)
         {
