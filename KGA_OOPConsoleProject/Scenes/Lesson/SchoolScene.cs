@@ -7,7 +7,7 @@
  */
 namespace KGA_OOPConsoleProject.Scenes.Lesson
 {
-    public class SchoolScene : Scene
+    public class SchoolScene : Scene, LessonManager
     {
         public enum State { Start, Lesson } // 시작하는 상태, 수업 상태
         public State nowState;
@@ -70,8 +70,8 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
             }
             else if (nowState == State.Lesson) // 수업 중
             {
-                LessonConment();
-                SelfConment();
+                LessonComment();
+                SelfComment();
 
             }
         }
@@ -100,7 +100,7 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
         /// <summary>
         /// 수업 후 증감스텟
         /// </summary>
-        private void UpgradeStatus()
+        public void UpgradeStatus()
         {
             player.INT += 5;
             player.maxHp += 2;
@@ -110,7 +110,7 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
         /// <summary>
         /// 수업 중 코멘트
         /// </summary>
-        private void LessonConment()
+        public void LessonComment()
         {
             chance = ran.Next(1, 6);
             switch (chance)
@@ -152,7 +152,7 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
         /// <summary>
         /// 수업 후 코멘트
         /// </summary>
-        private void SelfConment()
+        public void SelfComment()
         {
             chance = ran.Next(1, 6);
             switch (chance)

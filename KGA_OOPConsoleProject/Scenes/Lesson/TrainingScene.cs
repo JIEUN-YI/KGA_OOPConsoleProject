@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KGA_OOPConsoleProject.Scenes.Lesson
 {
-    public class TrainingScene : Scene
+    public class TrainingScene : Scene, LessonManager
     {
         public enum State { Start, Lesson } // 시작하는 상태, 수업 상태
         public State nowState;
@@ -34,31 +34,31 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
                 {
                     case 1:
                         Console.WriteLine(" ===================================== ");
-                        Console.WriteLine($" {player.name} : ");
+                        Console.WriteLine($" {player.name} : 잘부탁드립니다!");
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                         break;
                     case 2:
                         Console.WriteLine(" ===================================== ");
-                        Console.WriteLine($" {player.name} : ");
+                        Console.WriteLine($" {player.name} : 오늘은 몸 상태가 좋아");
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                         break;
                     case 3:
                         Console.WriteLine(" ===================================== ");
-                        Console.WriteLine($" {player.name} : ");
+                        Console.WriteLine($" {player.name} : 아~ 오늘은 좀 피곤해");
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                         break;
                     case 4:
                         Console.WriteLine(" ===================================== ");
-                        Console.WriteLine($" {player.name} : ");
+                        Console.WriteLine($" {player.name} : 오늘은 무엇을 배울까?");
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                         break;
                     case 5:
                         Console.WriteLine(" ===================================== ");
-                        Console.WriteLine($" {player.name} : ");
+                        Console.WriteLine($" {player.name} : 나도 강해질 수 있을까?");
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                         break;
@@ -68,8 +68,8 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
             }
             else if (nowState == State.Lesson) // 수업 중
             {
-                LessonConment();
-                SelfConment();
+                LessonComment();
+                SelfComment();
 
             }
         }
@@ -96,7 +96,7 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
         /// <summary>
         /// 수업 후 증감스텟
         /// </summary>
-        private void UpgradeStatus()
+        public void UpgradeStatus()
         {
             player.maxHp += 10;
             player.str += 10;
@@ -110,38 +110,38 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
         /// <summary>
         /// 수업 중 코멘트
         /// </summary>
-        private void LessonConment()
+        public void LessonComment()
         {
             chance = ran.Next(1, 6);
             switch (chance)
             {
                 case 1:
                     Console.WriteLine(" ===================================== ");
-                    Console.WriteLine($" 오늘은 ");
+                    Console.WriteLine($" 오늘은 격투술을 배웠다.");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
                 case 2:
                     Console.WriteLine(" ===================================== ");
-                    Console.WriteLine($" 오늘은 ");
+                    Console.WriteLine($" 오늘은 호신술을 배웠다.");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
                 case 3:
                     Console.WriteLine(" ===================================== ");
-                    Console.WriteLine($" 오늘은 ");
+                    Console.WriteLine($" 오늘은 검술을 배웠다.");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
                 case 4:
                     Console.WriteLine(" ===================================== ");
-                    Console.WriteLine($" 오늘은 ");
+                    Console.WriteLine($" 오늘은 방어술을 배웠다.");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
                 case 5:
                     Console.WriteLine(" ===================================== ");
-                    Console.WriteLine($" 오늘은 ");
+                    Console.WriteLine($" 오늘은 궁술을 배웠다.");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
@@ -152,33 +152,33 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
         /// <summary>
         /// 수업 후 코멘트
         /// </summary>
-        private void SelfConment()
+        public void SelfComment()
         {
             chance = ran.Next(1, 6);
             switch (chance)
             {
                 case 1:
-                    Console.WriteLine($" {player.name} : ");
+                    Console.WriteLine($" {player.name} : 형편없는 실력이였어...");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
                 case 2:
-                    Console.WriteLine($" {player.name} : ");
+                    Console.WriteLine($" {player.name} : 힘이 좀 더 강해진 것 같아!");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
                 case 3:
-                    Console.WriteLine($" {player.name} : ");
+                    Console.WriteLine($" {player.name} : 친구와 딴짓을 했다.");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
                 case 4:
-                    Console.WriteLine($" {player.name} : ");
+                    Console.WriteLine($" {player.name} : 모의 대련에서 승리했어!");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
                 case 5:
-                    Console.WriteLine($" {player.name} : ");
+                    Console.WriteLine($" {player.name} : 모의 대련에서 져버렸어... ");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(2000);
                     break;
