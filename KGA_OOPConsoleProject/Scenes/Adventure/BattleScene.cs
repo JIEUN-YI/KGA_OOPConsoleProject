@@ -1,6 +1,7 @@
 ﻿using KGA_OOPConsoleProject.Interface;
 using KGA_OOPConsoleProject.Manager;
 using KGA_OOPConsoleProject.Monsters;
+using System.Numerics;
 /* 코멘트
  * Battle씬 하나에서
  * 이전 장면별 분기 + 일반 필드 몬스터 배틀 or 보스 몬스터 배틀 기능을 구현
@@ -26,7 +27,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         }
         public override void Enter()
         {
-
+            
             switch (game.preScene)
             {
                 case VillageMtScene:
@@ -87,7 +88,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 Console.WriteLine(" ===================================== ");
                 Thread.Sleep(2000);
                 // 플레이어와 몬스터의 체력을 초기화하고 원래의 위치로 돌아감
-                player.nowHp = player.maxHp;
+                //player.nowHp = player.maxHp;
                 monster.nowHp = monster.maxHp;
                 game.ChangeScene(game.preScene);
             }
@@ -132,6 +133,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     int result = player.PlayerRun(player, monster);
                     if (result == 0)
                     {
+                        player.nowHp = player.maxHp;
+                        monster.nowHp = monster.maxHp;
                         game.ChangeScene(game.preScene);
                     }
                     break;
@@ -141,7 +144,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             }
         }
             
-        
+        /* 나갈때 플레이어 체력 원상복귀됨*/
         public override void Exit()
         {
             battleM.mobState = IAdventure.State.Live;

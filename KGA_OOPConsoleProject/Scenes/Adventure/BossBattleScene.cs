@@ -136,6 +136,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     int result = player.PlayerRun(player, monster);
                     if (result == 0)
                     {
+                        player.nowHp = player.maxHp;
+                        monster.nowHp = monster.maxHp;
                         game.ChangeScene(game.preScene);
                     }
                     break;

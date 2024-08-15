@@ -64,6 +64,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             switch (nowState)
             {
                 case State.Start:
+                    player.nowHp = player.maxHp;
                     Console.SetCursorPosition(0, 0); //맵의 깜빡임을 없애기 위한 커서 위치 이동
                     printM.PrintMap(map);
                     printM.PrintPlayer(playerPos);
