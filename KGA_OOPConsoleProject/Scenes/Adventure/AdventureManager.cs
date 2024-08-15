@@ -1,28 +1,29 @@
-﻿using KGA_OOPConsoleProject.Monsters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-/* 코멘트
- * Adventure 장면들에 공통으로 들어가는 함수들을 인터페이스로 빼와서 AdventureManager을 생성하여
- * 인터페이스로 상속받아 사용하게끔 설정
- * Move에 관련한 함수들은 공통으로 움직이는 설정이 필요한게 맞음으로 인터페이스에서 작성하여 상속시켜 사용하기 좋을 것 같음
+﻿/* 코멘트
+ * Point를 AdventureManager에서 선언하여 상속으로로 BattleManager에 연결
+ * 전체적인 모험 장면에서 AdcenteurManager에 연결된 Point를 사용하는 것으로 정리
+ * - 인터페이스로 사용을 고민
+ *  => 상속으로 하는것도 딱히...좋은 선택인지는 의문
  */
+using KGA_OOPConsoleProject.Monsters;
+
 namespace KGA_OOPConsoleProject.Scenes.Adventure
 {
     //Adventure에 공통으로 들어갈 Move 함수 제작
-    public interface AdventureManager
+    public class AdventureManager
     {
-        public enum State { Start, Battle, Finish }
+        public enum State { Live, Die }
+        public State playerState; // 플레이어 상태
+        public State bossState; // 보스 상태
+        public State mobState; // 몬스터 상태
         public struct Point { public int x, y; } // 위치 표현을 하는 x, y 좌표
+        public GameData game;
 
         #region 이동에 관련된 함수들
         /// <summary>
         /// 게임에서 플레이어의 이동
         /// inputKey를 받아서 이용하는 함수
         /// </summary>
-        public static Point Move(ConsoleKey inputKey, bool[,] map, Point playerPos, Point BossMobPos)
+        public Point Move(ConsoleKey inputKey, bool[,] map, Point playerPos, Point BossMobPos)
         {
             // 입력받은 키 기반 움직임
             switch (inputKey)
@@ -46,8 +47,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             }
             return playerPos;
         }
-
-        public static Point MoveUp(bool[,] map, Point playerPos, Point BossMobPos)
+        public Point MoveUp(bool[,] map, Point playerPos, Point BossMobPos)
         {
             Point next = new Point() { x = playerPos.x, y = playerPos.y - 1 };
             if (map[next.y, next.x]) //이동할 위치가 true 이면
@@ -57,7 +57,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             }
             return playerPos;
         }
-        public static Point MoveDown(bool[,] map, Point playerPos, Point BossMobPos)
+        public Point MoveDown(bool[,] map, Point playerPos, Point BossMobPos)
         {
             Point next = new Point() { x = playerPos.x, y = playerPos.y + 1 };
             if (map[next.y, next.x]) //이동할 위치가 true 이면
@@ -67,7 +67,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             }
             return playerPos;
         }
-        public static Point MoveLeft(bool[,] map, Point playerPos, Point BossMobPos)
+        public Point MoveLeft(bool[,] map, Point playerPos, Point BossMobPos)
         {
             Point next = new Point() { x = playerPos.x - 1, y = playerPos.y };
             if (map[next.y, next.x]) //이동할 위치가 true 이면
@@ -77,7 +77,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             }
             return playerPos;
         }
-        public static Point MoveRight(bool[,] map, Point playerPos, Point BossMobPos)
+        public Point MoveRight(bool[,] map, Point playerPos, Point BossMobPos)
         {
             Point next = new Point() { x = playerPos.x + 1, y = playerPos.y };
             if (map[next.y, next.x]) //이동할 위치가 true 이면
@@ -94,7 +94,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         /// 맵을 그리는 함수
         /// 배열이므로 y축이 우선출력
         /// </summary>
-        public static void PrintMap(bool[,] map)
+        public void PrintMap(bool[,] map)
         {
             for (int y = 0; y < map.GetLength(0); y++)
             {
@@ -113,52 +113,43 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 Console.WriteLine();
             }
         }
-        /// <summary>
+         /// <summary>
         /// 플레이어의 위치를 표현하는 함수
         /// </summary>
-        public static void PrintPlayer(Point playerPos)
+        public void PrintPlayer(Point playerPos)
         {
             Console.SetCursorPosition(playerPos.x, playerPos.y); // 플레이어의 위치에 커서를 이동
             Console.ForegroundColor = ConsoleColor.Green; // 플레이어의 표시 색
             Console.Write("P");// 플레이어 출력
             Console.ResetColor();// 콘솔표시색을 리셋해야함
         }
-        /// <summary>
+         /// <summary>
         /// 보스몬스터의 위치를 표현하는 함수
         /// </summary>
-        public static void PrintBoss(Point BossMobPos)
+        public void PrintBoss(Point BossMobPos)
         {
             Console.SetCursorPosition(BossMobPos.x, BossMobPos.y); // 필드 보스의 위치에 커서를 이동
             Console.ForegroundColor = ConsoleColor.Red; // 필드 보스의 표시 색
             Console.Write("B");// 필드 보스 출력
             Console.ResetColor();
         }
-        #endregion
-
-        #region 배틀에 관련된 함수들
-
-
 
         /// <summary>
-        /// 보스의 방에 도달했는지 확인
-        /// 플레이어와 보스의 위치를 입력받아서 사용
+        /// 임시함수 - 몬스터 위치 출력 검사 확인용
         /// </summary>
-
-        //public abstract void CheckReachBoss();
-
-        public static bool CheckReachBoss(Point playerPos, Point BossMobPos)
+        /// <param name="MobPos"></param>
+        public void PrintMob(Point MobPos)
         {
-            bool result = false;
-            if (playerPos.x == BossMobPos.x && playerPos.y == BossMobPos.y)
+            // 보스몬스터와 다른 위치에서 생성된 경우에만 필드 몬스터 표시
+            if (MobPos.x != 0 && MobPos.y != 0) 
             {
-                result = true;
-                return result;
+                Console.SetCursorPosition(MobPos.x, MobPos.y); // 필드 몬스터의 위치에 커서를 이동
+                Console.ForegroundColor = ConsoleColor.Yellow; // 필드 몬스터의 표시 색
+                Console.Write("M");
+                Console.ResetColor();
+
             }
-            return result;
         }
-
-        // 몬스터 배틀 시작*/
-
         #endregion
 
     }

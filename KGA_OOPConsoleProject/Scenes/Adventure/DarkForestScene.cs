@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,13 +13,16 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         public enum State { Start, Battle, Boss, End } // 시작, 살아있는 상태, 죽은 상태
         public State nowState;
 
+        BattleManager BaM = new BattleManager();
+        AdventureManager AdM = new AdventureManager();
+        Monster monster;
+
         Random ran = new Random(); // 랜덤을 사용
         // 맵을 그리기 위해 사용
         private bool[,] map;
         private ConsoleKey inputKey; // 입력키 저장
         private AdventureManager.Point playerPos; // 플레이어의 위치
         private AdventureManager.Point BossMobPos; // 보스 몬스터의 위치
-        public Monster monster;
         public DarkForestScene(GameData game, Player player) : base(game, player)
         {
 
@@ -56,9 +60,9 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             {
                 case State.Start:
                     Console.SetCursorPosition(0, 0); //맵의 깜빡임을 없애기 위한 커서 위치 이동
-                    AdventureManager.PrintMap(map);
-                    AdventureManager.PrintPlayer(playerPos);
-                    AdventureManager.PrintBoss(BossMobPos);
+                    AdM.PrintMap(map);
+                    AdM.PrintPlayer(playerPos);
+                    AdM.PrintBoss(BossMobPos);
                     break;
 
                 case State.Battle:
@@ -83,8 +87,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             switch (nowState)
             {
                 case State.Start:
-                    playerPos = AdventureManager.Move(inputKey, map, playerPos, BossMobPos);
-                    if (AdventureManager.CheckReachBoss(playerPos, BossMobPos))
+                    playerPos = AdM.Move(inputKey, map, playerPos, BossMobPos);
+                    if (BaM.CheckReachMob(playerPos, BossMobPos))
                     {
                         nowState = State.Boss;
                     }

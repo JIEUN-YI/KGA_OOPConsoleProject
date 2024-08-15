@@ -40,10 +40,10 @@ namespace KGA_OOPConsoleProject
         public Player() // 플레이어 생성자 - 플레이어 기본 값
         {
             money = 500;
-            maxHp = 10;
+            maxHp = 15;
             nowHp = maxHp;
-            ATK = 0;
-            DEF = 0;
+            ATK = 5;
+            DEF = 5;
             mCount = 0;
             str = 0;
             INT = 0;
@@ -108,7 +108,7 @@ namespace KGA_OOPConsoleProject
         public void PlayerAttack(Player player, Monster monster)
         {
             int playerAttack = (int)(player.ATK - monster.DEF * 0.5);
-            playerAttack = Math.Clamp(playerAttack, 0, 999);
+            playerAttack = Math.Clamp(playerAttack, 0, 100);
             Console.Clear();
             Console.WriteLine(" ===================================== ");
             Console.WriteLine($" {player.name}은(는) 힘껏 공격했다!");
@@ -133,7 +133,7 @@ namespace KGA_OOPConsoleProject
                 return result;
             }
 
-            return false;
+            return true;
         }
        /// <summary>
        /// 플레이어의 도망 함수

@@ -8,8 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Monsters\DeepM\" />
-    <Folder Include="Monsters\DarkM\" />
+    <Compile Remove="Monsters\Boss\**" />
+    <Compile Remove="Monsters\DarkM\**" />
+    <Compile Remove="Monsters\DeepM\**" />
+    <Compile Remove="Monsters\VillageM\**" />
+    <EmbeddedResource Remove="Monsters\Boss\**" />
+    <EmbeddedResource Remove="Monsters\DarkM\**" />
+    <EmbeddedResource Remove="Monsters\DeepM\**" />
+    <EmbeddedResource Remove="Monsters\VillageM\**" />
+    <None Remove="Monsters\Boss\**" />
+    <None Remove="Monsters\DarkM\**" />
+    <None Remove="Monsters\DeepM\**" />
+    <None Remove="Monsters\VillageM\**" />
   </ItemGroup>
 
 </Project>

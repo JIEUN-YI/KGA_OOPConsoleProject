@@ -12,6 +12,7 @@ using System.Threading.Tasks;
  * 유지보수성향상/ 확장성 향상/ 다형성/ 코드재사용성 향상에 좋다고는 하는데
  * 직관적으로 느껴지지 않는 것 같다
  * 아니면 이 경우에는 굳이 추상으로 제작할 필요가 없었던 걸까...
+ *  - Interface에 대한 이해가 아직 부족한 듯...
  */
 namespace KGA_OOPConsoleProject.Scenes.Lesson
 {
@@ -22,15 +23,15 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
         /// <summary>
         /// 수업 후 스탯 증감함수
         /// </summary>
-        public void UpgradeStatus();
+        public abstract void UpgradeStatus();
         /// <summary>
         /// 수업 중 코멘트
         /// </summary>
-        public void LessonComment();
+        public abstract void LessonComment();
         /// <summary>
         /// 수업 후 코멘트
         /// </summary>
-        public void SelfComment();
+        public abstract void SelfComment();
     }
 
 }

@@ -1,5 +1,4 @@
 ﻿using KGA_OOPConsoleProject.Monsters;
-using KGA_OOPConsoleProject.Monsters.Boss;
 /* 코멘트
  * Render()와 Update() 함수를 좀 더 명확하게 구별하여 쓰는 방법을 연구할 필요가 있음
  * - 이중 스위치문을 사용하여 해결하고자 했으나 플레이어와 몬스터의 상태 2가지로 구별해야해서 적합하지 않음
@@ -14,10 +13,10 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         private State nowBossState;
 
         private string input;
+
         Monster monster;
-        StrongTiger strongTiger = new StrongTiger();
-        AngryOtter angryOtter = new AngryOtter();
-        PollutionTiger pollutionTiger = new PollutionTiger();
+        BattleManager BaM = new();
+        AdventureManager AdM = new();
 
         public BossBattleScene(GameData game, Player player) : base(game, player)
         {
@@ -29,32 +28,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         {
             nowPlayerState = State.Live;
             nowBossState = State.Live;
-            switch (game.preScene)
-            {
-                case VillageMtScene:
-                    monster = strongTiger;
-                    Console.WriteLine(" ==== 마을 뒷 산 ===================== ");
-                    Console.WriteLine($" 전방에 {monster.name}이(가) 나타났다.");
-                    Console.WriteLine(" ===================================== ");
-                    Thread.Sleep(3000);
-                    break;
-                case DeepRiverScene:
-                    monster = angryOtter;
-                    Console.WriteLine(" ==== 깊은 강가 ===================== ");
-                    Console.WriteLine($" 전방에 {monster.name}이(가) 나타났다.");
-                    Console.WriteLine(" ===================================== ");
-                    Thread.Sleep(3000);
-                    break;
-                case DarkForestScene:
-                    monster = pollutionTiger;
-                    Console.WriteLine(" ==== 어두운 숲 ===================== ");
-                    Console.WriteLine($" 전방에 {monster.name}이(가) 나타났다.");
-                    Console.WriteLine(" ===================================== ");
-                    Thread.Sleep(3000);
-                    break;
-                default:
-                    break;
-            }
+            monster = BaM.BossEnter(game.preScene);
 
         }
         public override void Render()
@@ -205,6 +179,11 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     break;
             }
         }
+
+        /// <summary>
+        /// 이전 장면 별 장면 전환 함수
+        /// </summary>
+        /// <param name="preScene"></param>
 
         private void ChangeScene(Scene preScene)
         {

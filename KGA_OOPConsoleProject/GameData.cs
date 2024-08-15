@@ -3,8 +3,6 @@ using KGA_OOPConsoleProject.Scenes.Adventure;
 using KGA_OOPConsoleProject.Scenes.Lesson;
 using System.Collections.Generic;
 /* 코멘트
- * Adcenture폴더 속 Scene들에서 공통적으로 사용하는 Move함수들을 GameData에서 일괄로 구현해보려고 했으나 실패
- * 조금 더 연구가 필요함
  */
 namespace KGA_OOPConsoleProject
 {
@@ -63,7 +61,7 @@ namespace KGA_OOPConsoleProject
             scenes[(int)SceneType.DarkForest] = new DarkForestScene(this, player);
             scenes[(int)SceneType.SelectSchedule] = new SelectScheduleScene(this, player);
             scenes[(int)SceneType.AdventureSelect] = new AdventureSelectScene(this, player);
-            scenes[(int)SceneType.MonsterBattle] = new MonsterBattleScene(this, player);
+            scenes[(int)SceneType.Battle] = new BattleScene(this, player);
             scenes[(int)SceneType.BossBattle] = new BossBattleScene(this, player);
             scenes[(int)SceneType.Ending] = new EndingScene(this, player);
             nowScene = scenes[(int)SceneType.Title];
@@ -109,6 +107,12 @@ namespace KGA_OOPConsoleProject
         {
             nowScene.Exit(); // 원래의 씬에서 빠져나오고
             nowScene = scenes[(int)scenetype]; // 새로운 씬을 저장
+            nowScene.Enter(); // 새로운 씬에 입장
+        }
+        public void ChangeScene(Scene scenetype)
+        {
+            nowScene.Exit(); // 원래의 씬에서 빠져나오고
+            nowScene = scenetype; // 새로운 씬을 저장
             nowScene.Enter(); // 새로운 씬에 입장
         }
     }

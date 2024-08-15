@@ -20,6 +20,7 @@ namespace KGA_OOPConsoleProject.Happeing
          */
 
         // 추상클래스 사용 함수
+        public abstract void Enter();
         public abstract void Render();
         public abstract void Input();
         public abstract void Update();

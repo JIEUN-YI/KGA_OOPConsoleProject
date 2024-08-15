@@ -26,9 +26,16 @@ namespace KGA_OOPConsoleProject.Monsters
         Player player;
         GameData game;
 
-        public Monster()
+        public Monster(string name, int maxHp, int nowHp, int ATK, int DEF, int level, State nowState)
         {
-
+            this.name = name;
+            this.maxHp = maxHp;
+            this.nowHp = nowHp;
+            this.nowState = nowState;
+            this.ATK = ATK;
+            this.DEF = DEF;
+            this.level = level;
+            this.nowState = nowState;
         }
         /* 
          * 이름 - string 타입
@@ -48,6 +55,7 @@ namespace KGA_OOPConsoleProject.Monsters
         public void MonsterAttack(Player player, Monster monster)
         {
             int monsterAttack = (int)(monster.ATK - player.DEF * 0.5);
+            monsterAttack = Math.Clamp(monsterAttack, 0, 100);
             Console.WriteLine($" {monster.name}이(가) 반격을 시도한다!");
             Console.WriteLine($" {monsterAttack}의 데미지를 입었다.");
             Console.WriteLine(" ===================================== ");
