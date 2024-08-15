@@ -82,7 +82,6 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(3000);
                     break;
-                    //return monster;
                 case DeepRiverScene:
                     
                     Console.WriteLine(" ==== 깊은 강가 ===================== ");
@@ -90,7 +89,6 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(3000);
                     break;
-                //return monster;
                 case DarkForestScene:
                     
                     Console.WriteLine(" ==== 어두운 숲 ===================== ");
@@ -98,10 +96,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(3000);
                     break;
-                //return monster;
                 default:
                     break;
-                    //return monster;
             }
         }
         /// <summary>
@@ -159,9 +155,9 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             return monster;
         }
         public void BattleRender(Player player, Monster monster, State playerState, State monsterState)
-        {
-           
-            
+        {  
+
+
         }
         #endregion
 

@@ -40,10 +40,10 @@ namespace KGA_OOPConsoleProject
         public Player() // 플레이어 생성자 - 플레이어 기본 값
         {
             money = 500;
-            maxHp = 15;
+            maxHp = 40;
             nowHp = maxHp;
-            ATK = 5;
-            DEF = 5;
+            ATK = 20;
+            DEF = 15;
             mCount = 0;
             str = 0;
             INT = 0;

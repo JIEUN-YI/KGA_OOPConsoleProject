@@ -104,7 +104,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 case State.Boss:
                     //보스 배틀 장면으로 이동
                     game.preScene = game.nowScene;
-                    game.ChangeScene(SceneType.BossBattle);
+                        game.ChangeScene(SceneType.BossBattle);
                     nowState = State.End;
                     break;
                 case State.End:
