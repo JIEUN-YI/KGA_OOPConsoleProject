@@ -22,4 +22,9 @@
     <None Remove="Monsters\VillageM\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Scenes\Adventure\AdventureManager.cs" />
+    <Compile Remove="Scenes\Adventure\BattleManager.cs" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
-﻿using KGA_OOPConsoleProject.Monsters;
+﻿using KGA_OOPConsoleProject.Interface;
+using KGA_OOPConsoleProject.Manager;
+using KGA_OOPConsoleProject.Monsters;
 /* 코멘트
  * Battle씬 하나에서
  * 이전 장면별 분기 + 일반 필드 몬스터 배틀 or 보스 몬스터 배틀 기능을 구현
@@ -15,8 +17,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         private string input; // 입력
 
         Monster monster;
-        BattleManager BaM = new();
-        AdventureManager AdM = new();
+        BattleManager battleM = new();
 
         public BattleScene(GameData game, Player player) : base(game, player)
         {
@@ -29,16 +30,16 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             switch (game.preScene)
             {
                 case VillageMtScene:
-                    monster = BaM.VillageFieldMobCreate(); // 랜덤생성몬스터 저장
-                    BaM.PrintMobEnter(game.preScene, monster);
+                    monster = battleM.VillageFieldMobCreate(); // 랜덤생성몬스터 저장
+                    battleM.PrintMobEnter(game.preScene, monster);
                     break;
                 case DeepRiverScene:
-                    monster = BaM.DeepFieldMobCreate(); // 랜덤생성몬스터 저장
-                    BaM.PrintMobEnter(game.preScene, monster);
+                    monster = battleM.DeepFieldMobCreate(); // 랜덤생성몬스터 저장
+                    battleM.PrintMobEnter(game.preScene, monster);
                     break;
                 case DarkForestScene:
-                    monster = BaM.DarkFieldMobCreate(); // 랜덤생성몬스터 저장
-                    BaM.PrintMobEnter(game.preScene, monster);
+                    monster = battleM.DarkFieldMobCreate(); // 랜덤생성몬스터 저장
+                    battleM.PrintMobEnter(game.preScene, monster);
                     break;
                 default:
 
@@ -47,7 +48,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         }
         public override void Render()
         {
-            if (AdM.playerState == AdventureManager.State.Live && AdM.mobState == AdventureManager.State.Live)
+            if (battleM.playerState == IAdventure.State.Live && battleM.mobState == IAdventure.State.Live)
             {
                 Console.Clear();
                 Console.WriteLine(" === 몬스터 정보 ===================== ");
@@ -65,7 +66,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 Console.WriteLine(" 3. 아이템");
                 Console.Write("선택 : ");
             }
-            else if (AdM.playerState == AdventureManager.State.Die) // 플레이어 사망 시
+            else if (battleM.playerState == IAdventure.State.Die) // 플레이어 사망 시
             {
                 Console.Clear();
                 Console.WriteLine(" ===================================== ");
@@ -78,7 +79,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 monster.nowHp = monster.maxHp;
                 game.ChangeScene(game.preScene);
             }
-            else if (AdM.mobState == AdventureManager.State.Die) // 몬스터 사망 시
+            else if (battleM.mobState == IAdventure.State.Die) // 몬스터 사망 시
             {
                 Console.Clear();
                 Console.WriteLine(" ===================================== ");
@@ -93,7 +94,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         }
         public override void Input()
         {
-            if (AdM.playerState == AdventureManager.State.Live && AdM.mobState == AdventureManager.State.Live)
+            if (battleM.playerState == IAdventure.State.Live && battleM.mobState == IAdventure.State.Live)
             {
                 input = Console.ReadLine();
             }
@@ -104,7 +105,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             {
                 case "1":
                     player.PlayerAttack(player, monster); //플레이어 공격
-                    if (monster.MonsterLive(player, monster) == true)//몬스터 생존여부
+                    if (monster.MonsterLive(monster) == true)//몬스터 생존여부
                     {
                         Console.WriteLine(" === 몬스터 정보 ===================== ");
                         Console.WriteLine($" 이름 : {monster.name,+3}");
@@ -112,9 +113,9 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                         monster.MonsterAttack(player, monster);//몬스터 반격
-                        if (player.PlayerLive(player, monster) == false)//플레이어 생존여부
+                        if (player.PlayerLive(player) == false)//플레이어 생존여부
                         {
-                            AdM.playerState = AdventureManager.State.Die;
+                            battleM.playerState = IAdventure.State.Die;
                         }
                         Console.WriteLine(" === 내 정보 ========================= ");
                         Console.WriteLine($" 이름 : {player.name,+3}");
@@ -122,14 +123,14 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                     }
-                    else if (monster.MonsterLive(player, monster) == false)
+                    else if (monster.MonsterLive(monster) == false)
                     {
-                        AdM.mobState = AdventureManager.State.Die;
+                        battleM.mobState = IAdventure.State.Die;
                     }
                     break;
                 case "2":
                     int result = player.PlayerRun(player, monster);
-                    if (result == 1)
+                    if (result == 0)
                     {
                         game.ChangeScene(game.preScene);
                     }
@@ -143,8 +144,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         
         public override void Exit()
         {
-            AdM.mobState = AdventureManager.State.Live;
-            AdM.bossState = AdventureManager.State.Live;
+            battleM.mobState = IAdventure.State.Live;
+            battleM.bossState = IAdventure.State.Live;
         }
 
     }

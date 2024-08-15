@@ -62,15 +62,14 @@ namespace KGA_OOPConsoleProject.Monsters
             Thread.Sleep(2000);
             player.nowHp -= monsterAttack;
         }
-        public bool MonsterLive(Player player, Monster monster)
+        public bool MonsterLive(Monster monster)
         {
-           bool result = true; //생존
            if(monster.nowHp <= 0)
             {
                 monster.nowHp = 0;
-                result = false; //사망
+                return false; //사망
             }
-            return result;
+            return true; //생존
 
         }
     }

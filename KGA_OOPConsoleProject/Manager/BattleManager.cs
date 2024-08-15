@@ -1,14 +1,24 @@
-﻿using KGA_OOPConsoleProject.Monsters;
+﻿using KGA_OOPConsoleProject.Interface;
+using KGA_OOPConsoleProject.Monsters;
+using KGA_OOPConsoleProject.Scenes.Adventure;
+using KGA_OOPConsoleProject.Scenes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 /* 코멘트
- * AdventureManager 클래스를 상속받아서 동일한 변수를 사용하도록 설정
- * Point변수 때문에 상속으로 설정함
+ * IAdventure를 사용하여 Battle Scene에 사용하는 함수를 모은 클래스
  */
-namespace KGA_OOPConsoleProject.Scenes.Adventure
+namespace KGA_OOPConsoleProject.Manager
 {
-    public class BattleManager : AdventureManager
+    public class BattleManager : IAdventure
     {
-        
+        public IAdventure.State playerState; // 플레이어 상태
+        public IAdventure.State bossState; // 보스 상태
+        public IAdventure.State mobState; // 몬스터 상태
 
+        //public struct Point { public int x, y; }
         /// <summary>
         /// 몬스터에게 도달했는지 확인
         /// 플레이어와 몬스터의 위치를 입력받아서 사용
@@ -16,7 +26,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         /// <param name="playerPos"></param>
         /// <param name="MobPos"></param>
         /// <returns></returns>
-        public bool CheckReachMob(Point playerPos, Point MobPos)
+        public bool CheckReachMob(IAdventure.Point playerPos, IAdventure.Point MobPos)
         {
             bool result = false;
             if (playerPos.x == MobPos.x && playerPos.y == MobPos.y)
@@ -44,14 +54,14 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     Thread.Sleep(3000);
                     break;
                 case DeepRiverScene:
-                    
+
                     Console.WriteLine(" ==== 깊은 강가 ===================== ");
                     Console.WriteLine($" 전방에 {monster.name}이(가) 나타났다.");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(3000);
                     break;
                 case DarkForestScene:
-                    
+
                     Console.WriteLine(" ==== 어두운 숲 ===================== ");
                     Console.WriteLine($" 전방에 {monster.name}이(가) 나타났다.");
                     Console.WriteLine(" ===================================== ");
@@ -68,10 +78,10 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         /// <param name="Map"></param>
         /// <param name="bossMobPos"></param>
         /// <returns></returns>
-        public Point FieldMobPos(bool[,] Map, Point bossMobPos, Point playerPos)
+        public IAdventure.Point FieldMobPos(bool[,] Map, IAdventure.Point bossMobPos, IAdventure.Point playerPos)
         {
             Random random = new Random();
-            Point mobPos;
+            IAdventure.Point mobPos;
             int x = 0; int y = 0;
             mobPos.x = y; mobPos.y = x;
 
@@ -81,9 +91,9 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 y = random.Next(1, 16);
                 mobPos.x = x; mobPos.y = y;
             }
-            if (mobPos.y != bossMobPos.y && mobPos.x != bossMobPos.x ) // 맵에서 이동가능 하고 보스몹 위치가 아닐 때
+            if (mobPos.y != bossMobPos.y && mobPos.x != bossMobPos.x) // 맵에서 이동가능 하고 보스몹 위치가 아닐 때
             {
-                if(mobPos.y != playerPos.y && mobPos.x != playerPos.x)
+                if (mobPos.y != playerPos.y && mobPos.x != playerPos.x)
                 {
                     return mobPos;
                 }
@@ -121,7 +131,6 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             }
             return monster;
         }
-
         public Monster DeepFieldMobCreate()
         {
             Monster monster = null;
@@ -164,7 +173,5 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             }
             return monster;
         }
-
-
     }
 }

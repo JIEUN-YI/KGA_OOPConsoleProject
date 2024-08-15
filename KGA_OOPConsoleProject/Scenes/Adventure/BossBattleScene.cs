@@ -1,4 +1,5 @@
-﻿using KGA_OOPConsoleProject.Monsters;
+﻿using KGA_OOPConsoleProject.Manager;
+using KGA_OOPConsoleProject.Monsters;
 /* 코멘트
  * Render()와 Update() 함수를 좀 더 명확하게 구별하여 쓰는 방법을 연구할 필요가 있음
  * - 이중 스위치문을 사용하여 해결하고자 했으나 플레이어와 몬스터의 상태 2가지로 구별해야해서 적합하지 않음
@@ -15,8 +16,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         private string input;
 
         Monster monster;
-        BattleManager BaM = new();
-        AdventureManager AdM = new();
+        BattleManager battleM = new();
 
         public BossBattleScene(GameData game, Player player) : base(game, player)
         {
@@ -28,7 +28,25 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         {
             nowPlayerState = State.Live;
             nowBossState = State.Live;
-            monster = BaM.BossEnter(game.preScene);
+
+            switch (game.preScene)
+            {
+                case VillageMtScene:
+                    monster = VillageM.strongTiger;
+                    battleM.PrintMobEnter(game.preScene, monster);
+                    break;
+                case DeepRiverScene:
+                    monster = DeepM.angryOtter;
+                    battleM.PrintMobEnter(game.preScene, monster);
+                    break;
+                case DarkForestScene:
+                    monster = DarkM.pollutionTiger;
+                    battleM.PrintMobEnter(game.preScene, monster);
+                    break;
+                default:
+
+                    break;
+            }
 
         }
         public override void Render()
@@ -91,7 +109,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             {
                 case "1":
                     player.PlayerAttack(player, monster); //플레이어 공격
-                    if (monster.MonsterLive(player, monster) == true)//몬스터 생존여부
+                    if (monster.MonsterLive(monster) == true)//몬스터 생존여부
                     {
                         Console.WriteLine(" === 몬스터 정보 ===================== ");
                         Console.WriteLine($" 이름 : {monster.name,+3}");
@@ -99,7 +117,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                         monster.MonsterAttack(player, monster);//몬스터 반격
-                        if (player.PlayerLive(player, monster) == false)//플레이어 생존여부
+                        if (player.PlayerLive(player) == false)//플레이어 생존여부
                         {
                             nowPlayerState = State.Die;
                         }
@@ -109,16 +127,16 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                     }
-                    else if (monster.MonsterLive(player, monster) == false)
+                    else if (monster.MonsterLive(monster) == false)
                     {
                         nowBossState = State.Die;
                     }
                     break;
                 case "2":
                     int result = player.PlayerRun(player, monster);
-                    if (result == 1)
+                    if (result == 0)
                     {
-                        ChangeScene(game.preScene);
+                        game.ChangeScene(game.preScene);
                     }
                     break;
                 case "3":
@@ -141,7 +159,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             {
                 case "1":
                     player.PlayerAttack(player, monster); //플레이어 공격
-                    if (monster.MonsterLive(player, monster) == true)//몬스터 생존여부
+                    if (monster.MonsterLive(monster) == true)//몬스터 생존여부
                     {
                         Console.WriteLine(" === 몬스터 정보 ===================== ");
                         Console.WriteLine($" 이름 : {monster.name,+3}");
@@ -149,7 +167,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                         monster.MonsterAttack(player, monster);//몬스터 반격
-                        if (player.PlayerLive(player, monster) == false)//플레이어 생존여부
+                        if (player.PlayerLive(player) == false)//플레이어 생존여부
                         {
                             nowPlayerState = State.Die;
                         }
@@ -159,7 +177,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                         Console.WriteLine(" ===================================== ");
                         Thread.Sleep(2000);
                     }
-                    else if (monster.MonsterLive(player, monster) == false)
+                    else if (monster.MonsterLive(monster) == false)
                     {
                         nowBossState = State.Die;
                     }

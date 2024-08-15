@@ -123,17 +123,14 @@ namespace KGA_OOPConsoleProject
         /// <param name="player"></param>
         /// <param name="monster"></param>
         /// <returns></returns>
-        public bool PlayerLive(Player player, Monster monster)
+        public bool PlayerLive(Player player)
         {
-            bool result = true; //생존
             if (player.nowHp <= 0)
             {
                 player.nowHp = 0;
-                result = false;//사망
-                return result;
+                return false;//사망
             }
-
-            return true;
+            return true;//생존
         }
        /// <summary>
        /// 플레이어의 도망 함수
@@ -144,16 +141,26 @@ namespace KGA_OOPConsoleProject
         public int PlayerRun(Player player, Monster monster)
         {
             int num = ran.Next(0, 2);
+            int result = 0;
             switch (num)
-            {
+            {            
                 case 0:
                     Console.Clear();
                     Console.WriteLine(" ===================================== ");
                     Console.WriteLine(" 도망에 실패했다!");
                     Console.WriteLine(" ===================================== ");
                     monster.MonsterAttack(player, monster);
+                    if(PlayerLive(player) == false)
+                    {
+                        result = 0;// 플레이어 사망
+                    }
+                    else
+                    {
+                        result = 1;// 플레이어 생존
+                    }
+                    //PlayerLive(player);
                     Thread.Sleep(2000);
-                    return num;
+                    return result;
                 case 1:
                     Console.Clear();
                     Console.WriteLine(" ===================================== ");
@@ -161,9 +168,10 @@ namespace KGA_OOPConsoleProject
                     Console.WriteLine(" 무사히 도망에 성공했다.");
                     Console.WriteLine(" ===================================== ");
                     Thread.Sleep(3000);
-                    return num;
+                    result = 0;// 플레이어 도망 성공
+                    break;
             }
-            return num;
+            return result;
         }
 
 
