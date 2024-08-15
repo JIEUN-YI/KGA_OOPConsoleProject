@@ -106,7 +106,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         /// <param name="Map"></param>
         /// <param name="bossMobPos"></param>
         /// <returns></returns>
-        public Point FieldMobPos(bool[,] Map, Point bossMobPos)
+        public Point FieldMobPos(bool[,] Map, Point bossMobPos, Point playerPos)
         {
             Random random = new Random();
             Point mobPos;
@@ -121,7 +121,10 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             }
             if (mobPos.y != bossMobPos.y && mobPos.x != bossMobPos.x ) // 맵에서 이동가능 하고 보스몹 위치가 아닐 때
             {
-                return mobPos;
+                if(mobPos.y != playerPos.y && mobPos.x != playerPos.x)
+                {
+                    return mobPos;
+                }
             }
             return default;
 
@@ -154,10 +157,48 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             }
             return monster;
         }
-        public void BattleRender(Player player, Monster monster, State playerState, State monsterState)
-        {  
 
-
+        public Monster DeepFieldMobCreate()
+        {
+            Monster monster = null;
+            Random random = new Random();
+            int num = random.Next(0, 3);
+            switch (num)
+            {
+                case 0:
+                    monster = DeepM.hugeToad;
+                    return monster;
+                case 1:
+                    monster = DeepM.fierceHeron;
+                    return monster;
+                case 2:
+                    monster = DeepM.weirdCrane;
+                    return monster;
+                default:
+                    break;
+            }
+            return monster;
+        }
+        public Monster DarkFieldMobCreate()
+        {
+            Monster monster = null;
+            Random random = new Random();
+            int num = random.Next(0, 3);
+            switch (num)
+            {
+                case 0:
+                    monster = VillageM.warnWolf;
+                    return monster;
+                case 1:
+                    monster = DeepM.weirdCrane;
+                    return monster;
+                case 2:
+                    monster = DarkM.unknownMonster;
+                    return monster;
+                default:
+                    break;
+            }
+            return monster;
         }
         #endregion
 

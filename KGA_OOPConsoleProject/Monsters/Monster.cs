@@ -56,7 +56,7 @@ namespace KGA_OOPConsoleProject.Monsters
         {
             int monsterAttack = (int)(monster.ATK - player.DEF * 0.5);
             monsterAttack = Math.Clamp(monsterAttack, 0, 100);
-            Console.WriteLine($" {monster.name}이(가) 반격을 시도한다!");
+            Console.WriteLine($" {monster.name}이(가) 공격을 시도한다!");
             Console.WriteLine($" {monsterAttack}의 데미지를 입었다.");
             Console.WriteLine(" ===================================== ");
             Thread.Sleep(2000);

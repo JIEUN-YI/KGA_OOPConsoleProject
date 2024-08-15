@@ -9,10 +9,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 {
     public class VillageMtScene : Scene
     {
-        //public enum State { Start, Ing, End }
         public enum State { Start, Ing, Battle, AfterB, End } // 시작, 살아있는 상태, 죽은 상태
         public State nowState;
-        Random ran = new Random(); // 랜덤을 사용
 
         BattleManager BaM = new BattleManager();
         AdventureManager AdM = new AdventureManager();
@@ -24,8 +22,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         private ConsoleKey inputKey; // 입력키 저장
         private AdventureManager.Point playerPos; // 플레이어의 위치
         private AdventureManager.Point bossMobPos; // 보스 몬스터의 위치
-        private AdventureManager.Point mobPos;
-
+        private AdventureManager.Point fieldMobPos; //필드 몬스터의 위치
 
         public VillageMtScene(GameData game, Player player) : base(game, player)
         {
@@ -67,7 +64,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     AdM.PrintMap(map);
                     AdM.PrintPlayer(playerPos);
                     AdM.PrintBoss(bossMobPos);
-                    AdM.PrintMob(mobPos); //몬스터위치확인용
+                    AdM.PrintMob(fieldMobPos); //몬스터위치확인용
                     break;
                 case State.Ing:
                     Console.SetCursorPosition(0, 0); //맵의 깜빡임을 없애기 위한 커서 위치 이동
@@ -76,7 +73,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     AdM.PrintBoss(bossMobPos);
                     if(AdM.mobState == AdventureManager.State.Live)
                     {
-                    AdM.PrintMob(mobPos); //몬스터위치확인용_검사함수
+                    AdM.PrintMob(fieldMobPos); //몬스터위치확인용_검사함수
                     }
                     break;
                 case State.Battle:
@@ -106,8 +103,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             {
                 case State.Start:
                     playerPos.x = 1; playerPos.y = 1; // 플레이어 위치 설정
-                    mobPos.x = 0; mobPos.y = 0;
-                    mobPos = BaM.FieldMobPos(map, bossMobPos); // 몬스터위치 선정
+                    fieldMobPos.x = 0; fieldMobPos.y = 0;
+                    fieldMobPos = BaM.FieldMobPos(map, bossMobPos, playerPos); // 몬스터위치 선정
                     nowState = State.Ing;
                     break;
                 case State.Ing:
@@ -121,7 +118,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     }
                     // 플레이어의 위치와 보스의 위치가 같으면
                     // 상태를 보스로 변경
-                    else if (BaM.CheckReachMob(playerPos, mobPos))
+                    else if (BaM.CheckReachMob(playerPos, fieldMobPos))
                     {
                         game.preScene = game.nowScene;
                         nowState = State.Battle;
@@ -155,7 +152,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         }
         public override void Exit()
         {
-
+            AdM.playerState = AdventureManager.State.Live;
         }
 
     }

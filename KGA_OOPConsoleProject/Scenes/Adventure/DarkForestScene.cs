@@ -10,19 +10,21 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 {
     public class DarkForestScene : Scene
     {
-        public enum State { Start, Battle, Boss, End } // 시작, 살아있는 상태, 죽은 상태
+        public enum State { Start, Ing, Battle, AfterB, End } // 시작, 살아있는 상태, 죽은 상태
         public State nowState;
 
         BattleManager BaM = new BattleManager();
         AdventureManager AdM = new AdventureManager();
+        Random random = new Random();
         Monster monster;
 
-        Random ran = new Random(); // 랜덤을 사용
         // 맵을 그리기 위해 사용
         private bool[,] map;
         private ConsoleKey inputKey; // 입력키 저장
         private AdventureManager.Point playerPos; // 플레이어의 위치
-        private AdventureManager.Point BossMobPos; // 보스 몬스터의 위치
+        private AdventureManager.Point bossMobPos; // 보스 몬스터의 위치
+        private AdventureManager.Point fieldMobPos; //필드 몬스터의 위치
+
         public DarkForestScene(GameData game, Player player) : base(game, player)
         {
 
@@ -51,8 +53,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 { false,  true,  true, false,  true, false, false, false,  true,  true,  true,  true,  true,  true,  true,  true,  true, false },
                 { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false }
             };
-            playerPos.x = 1; playerPos.y = 1; // 플레이어 위치 설정
-            BossMobPos.x = 16; BossMobPos.y = 2;// 보스 위치 설정
+            bossMobPos.x = 16; bossMobPos.y = 2;// 보스 위치 설정
         }
         public override void Render()
         {
@@ -62,22 +63,36 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     Console.SetCursorPosition(0, 0); //맵의 깜빡임을 없애기 위한 커서 위치 이동
                     AdM.PrintMap(map);
                     AdM.PrintPlayer(playerPos);
-                    AdM.PrintBoss(BossMobPos);
+                    AdM.PrintBoss(bossMobPos);
+                    AdM.PrintMob(fieldMobPos); //몬스터위치확인용
                     break;
-
+                case State.Ing:
+                    Console.SetCursorPosition(0, 0); //맵의 깜빡임을 없애기 위한 커서 위치 이동
+                    AdM.PrintMap(map);
+                    AdM.PrintPlayer(playerPos);
+                    AdM.PrintBoss(bossMobPos);
+                    if (AdM.mobState == AdventureManager.State.Live)
+                    {
+                        AdM.PrintMob(fieldMobPos); //몬스터위치확인용_검사함수
+                    }
+                    break;
                 case State.Battle:
-                    break;
-                case State.Boss:
-                    //콘솔 클리어 후
                     Console.Clear();
                     break;
+                case State.AfterB:
+                    Console.SetCursorPosition(0, 0); //맵의 깜빡임을 없애기 위한 커서 위치 이동
+                    AdM.PrintMap(map);
+                    AdM.PrintPlayer(playerPos);
+                    AdM.PrintBoss(bossMobPos);
+                    break;
                 case State.End:
+                    Console.Clear();
                     break;
             }
         }
         public override void Input()
         {
-            if (nowState == State.Start)
+            if (nowState == State.Ing || nowState == State.AfterB)
             {
                 inputKey = Console.ReadKey(true).Key; // 미로이므로 화살표를 입력받아야 함
             }
@@ -87,22 +102,46 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             switch (nowState)
             {
                 case State.Start:
-                    playerPos = AdM.Move(inputKey, map, playerPos, BossMobPos);
-                    if (BaM.CheckReachMob(playerPos, BossMobPos))
+                    playerPos.x = 1; playerPos.y = 1; // 플레이어 위치 설정
+                    fieldMobPos.x = 0; fieldMobPos.y = 0;
+                    fieldMobPos = BaM.FieldMobPos(map, bossMobPos, playerPos);  // 몬스터위치 선정
+                    nowState = State.Ing;
+                    break;
+                case State.Ing:
+                    playerPos = AdM.Move(inputKey, map, playerPos, bossMobPos);
+
+                    if (BaM.CheckReachMob(playerPos, bossMobPos))
                     {
-                        nowState = State.Boss;
+                        nowState = State.End;
+                        game.preScene = game.nowScene;
+                        game.ChangeScene(SceneType.BossBattle);
                     }
-                    //플레이어의 위치와 보스의 위치가 같으면
-                    //상태를 보스로 변경
+                    // 플레이어의 위치와 보스의 위치가 같으면
+                    // 상태를 보스로 변경
+                    else if (BaM.CheckReachMob(playerPos, fieldMobPos))
+                    {
+                        game.preScene = game.nowScene;
+                        nowState = State.Battle;
+                        game.ChangeScene(SceneType.Battle);
+                    }
+                    // 플레이어의 위치와 몬스터의 위치가 같으면
+                    // 상태를 배틀로 변경
                     break;
 
                 case State.Battle:
+                    nowState = State.AfterB;
+                    Console.Clear();
                     break;
-                case State.Boss:
-                    //보스 배틀 장면으로 이동
-                    game.preScene = game.nowScene;
+                case State.AfterB:
+                    playerPos = AdM.Move(inputKey, map, playerPos, bossMobPos);
+
+                    if (BaM.CheckReachMob(playerPos, bossMobPos))
+                    {
+                        nowState = State.End;
                         game.ChangeScene(SceneType.BossBattle);
-                    nowState = State.End;
+                    }
+                    // 플레이어의 위치와 보스의 위치가 같으면
+                    // 상태를 보스로 변경
                     break;
                 case State.End:
                     nowState = State.Start;
@@ -113,7 +152,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         }
         public override void Exit()
         {
-
+            AdM.playerState = AdventureManager.State.Live;
         }
 
     }

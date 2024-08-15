@@ -151,11 +151,8 @@ namespace KGA_OOPConsoleProject
                     Console.WriteLine(" ===================================== ");
                     Console.WriteLine(" 도망에 실패했다!");
                     Console.WriteLine(" ===================================== ");
-                    Console.WriteLine($" {monster.name}이(가) 공격을 시도한다!");
-                    Console.WriteLine($"{(int)(monster.ATK - player.DEF * 0.5)}의 데미지를 입었다.");
                     monster.MonsterAttack(player, monster);
-                    Console.WriteLine(" ===================================== ");
-                    Thread.Sleep(3000);
+                    Thread.Sleep(2000);
                     return num;
                 case 1:
                     Console.Clear();

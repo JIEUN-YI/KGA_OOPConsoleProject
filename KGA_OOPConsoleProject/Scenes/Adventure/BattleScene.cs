@@ -33,10 +33,12 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     BaM.PrintMobEnter(game.preScene, monster);
                     break;
                 case DeepRiverScene:
-
+                    monster = BaM.DeepFieldMobCreate(); // 랜덤생성몬스터 저장
+                    BaM.PrintMobEnter(game.preScene, monster);
                     break;
                 case DarkForestScene:
-
+                    monster = BaM.DarkFieldMobCreate(); // 랜덤생성몬스터 저장
+                    BaM.PrintMobEnter(game.preScene, monster);
                     break;
                 default:
 
@@ -141,7 +143,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         
         public override void Exit()
         {
-
+            AdM.mobState = AdventureManager.State.Live;
+            AdM.bossState = AdventureManager.State.Live;
         }
 
     }
