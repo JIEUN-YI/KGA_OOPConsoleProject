@@ -59,11 +59,11 @@
   
 4일차(15일)
 
-- Happening 자식클래스 작성
+~~- Happening 자식클래스 작성~~
   
 - Adventure 기능 완성하기
 
-- Items 자식클래스 작성
+~~- Items 자식클래스 작성~~
 
 ~~- Map 기능 완성하기~~
   
@@ -71,6 +71,14 @@
   
 5일차(16일)
 
+- Adventure 기능 완성하기 **Fix Adventure 2024.08.16 커밋완료**
+
+- Inventory 기능 구현
+
+- Items 기능 구현
+  
+- Happeing 기능 구현
+  
 - 구조 확립하고 버그 확인
    
 
