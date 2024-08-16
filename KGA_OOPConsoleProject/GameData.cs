@@ -3,6 +3,7 @@ using KGA_OOPConsoleProject.Scenes.Adventure;
 using KGA_OOPConsoleProject.Scenes.Lesson;
 using System.Collections.Generic;
 /* 코멘트
+ * 게임 기간과 최대 능력치는 실제 플레이 난이도에 따라 조절 필수
  */
 namespace KGA_OOPConsoleProject
 {
@@ -100,7 +101,7 @@ namespace KGA_OOPConsoleProject
          * - Update() 새로운 행동을 시키고 Exit() 장면에서 빠져나옴
          */
         /// <summary>
-        /// Scene 변경 함수
+        /// Scene 변경 함수 2종
         /// </summary>
         /// <param name="scenetype"></param>
         public void ChangeScene(SceneType scenetype)

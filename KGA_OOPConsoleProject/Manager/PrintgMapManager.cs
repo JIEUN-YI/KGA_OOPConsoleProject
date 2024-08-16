@@ -62,7 +62,7 @@ namespace KGA_OOPConsoleProject.Manager
         /// <param name="MobPos"></param>
         public void PrintMob(IAdventure.Point MobPos)
         {
-            // 보스몬스터와 다른 위치에서 생성된 경우에만 필드 몬스터 표시
+            // 필드 몬스터 표시
             if (MobPos.x != 0 && MobPos.y != 0)
             {
                 Console.SetCursorPosition(MobPos.x, MobPos.y); // 필드 몬스터의 위치에 커서를 이동
@@ -70,6 +70,18 @@ namespace KGA_OOPConsoleProject.Manager
                 Console.Write("M");
                 Console.ResetColor();
 
+            }
+        }
+        /// <summary>
+        /// 몬스터가 살아있는 경우 맵에 표시하는 함수
+        /// </summary>
+        /// <param name="MobState"></param>
+        /// <param name="MobPos"></param>
+       public void StateCheckPrintMob(IAdventure.State MobState, IAdventure.Point MobPos)
+        {
+            if(MobState == IAdventure.State.Live)
+            {
+                PrintMob(MobPos);
             }
         }
 

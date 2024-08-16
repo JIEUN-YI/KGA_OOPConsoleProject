@@ -16,7 +16,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         }
         public override void Enter()
         {
-
+                player.nowHp = player.maxHp;
         }
         public override void Render()
         {

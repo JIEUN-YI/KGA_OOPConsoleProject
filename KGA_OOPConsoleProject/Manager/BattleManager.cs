@@ -1,12 +1,7 @@
 ﻿using KGA_OOPConsoleProject.Interface;
 using KGA_OOPConsoleProject.Monsters;
-using KGA_OOPConsoleProject.Scenes.Adventure;
 using KGA_OOPConsoleProject.Scenes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KGA_OOPConsoleProject.Scenes.Adventure;
 /* 코멘트
  * IAdventure를 사용하여 Battle Scene에 사용하는 함수를 모은 클래스
  */
@@ -84,24 +79,43 @@ namespace KGA_OOPConsoleProject.Manager
             IAdventure.Point mobPos;
             int x = 0; int y = 0;
             mobPos.x = y; mobPos.y = x;
-
+            // 맵에서 이동이 가능한 동안
             while (Map[y, x] == false)
             {
                 x = random.Next(1, 16);
                 y = random.Next(1, 16);
-                mobPos.x = x; mobPos.y = y;
-            }
-            if (mobPos.y != bossMobPos.y && mobPos.x != bossMobPos.x) // 맵에서 이동가능 하고 보스몹 위치가 아닐 때
-            {
-                if (mobPos.y != playerPos.y && mobPos.x != playerPos.x)
+                mobPos.x = x; mobPos.y = y; // 좌표를 생성하고
+
+                if (mobPos.y != bossMobPos.y && mobPos.x != bossMobPos.x) // 보스몹 위치가 아니고
                 {
-                    return mobPos;
+                    if (mobPos.y != playerPos.y && mobPos.x != playerPos.x) // 플레이어의 위치도 아니면
+                    {
+                        mobPos.x = x; mobPos.y = y;
+                    }
                 }
             }
-            return default;
+            return mobPos;
 
         }
 
+
+        /// <summary>
+        /// 두 몬스터의 위치를 비교하는 함수
+        /// </summary>
+        /// <param name="Map"></param>
+        /// <param name="fieldMobPos1"></param>
+        /// <param name="fieldMobPos2"></param>
+        /// <returns></returns>
+        /*public bool CheckOverlapMobPos(bool[,] Map, IAdventure.Point fieldMobPos1, IAdventure.Point fieldMobPos2)
+        {
+            bool result = false;
+            if (fieldMobPos1.y == fieldMobPos2.y && fieldMobPos1.x == fieldMobPos2.x) // 두 몬스터의 위치를 비교
+            {
+                return result; // 같으면 false
+            }
+            result = true; // 다르면 true 반환
+            return result;
+        }*/
 
         /// <summary>
         /// 마을 뒷 산 몬스터 랜덤 생성 후 리턴
@@ -131,6 +145,11 @@ namespace KGA_OOPConsoleProject.Manager
             }
             return monster;
         }
+
+        /// <summary>
+        /// 깊은 강가 몬스터 랜덤 생성 후 리턴
+        /// </summary>
+        /// <returns></returns>
         public Monster DeepFieldMobCreate()
         {
             Monster monster = null;
@@ -152,6 +171,11 @@ namespace KGA_OOPConsoleProject.Manager
             }
             return monster;
         }
+
+        /// <summary>
+        /// 어두운 숲 몬스터 랜덤 생성 후 리턴
+        /// </summary>
+        /// <returns></returns>
         public Monster DarkFieldMobCreate()
         {
             Monster monster = null;

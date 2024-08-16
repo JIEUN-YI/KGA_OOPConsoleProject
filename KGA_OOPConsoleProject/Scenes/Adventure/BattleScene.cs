@@ -22,8 +22,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 
         public BattleScene(GameData game, Player player) : base(game, player)
         {
-            this.game = game;
-            this.player = player;
+
         }
         public override void Enter()
         {
@@ -76,7 +75,6 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 Console.WriteLine(" ===================================== ");
                 Thread.Sleep(2000);
                 // 플레이어와 몬스터의 체력을 초기화하고 원래의 위치로 돌아감
-                player.nowHp = player.maxHp;
                 monster.nowHp = monster.maxHp;
                 game.ChangeScene(game.preScene);
             }
@@ -84,12 +82,12 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             {
                 Console.Clear();
                 Console.WriteLine(" ===================================== ");
-                Console.WriteLine($" {player.name}은/는 {monster.name}을/를 \n 쓰려트렸다!");
+                Console.WriteLine($" {player.name}은/는 \n{monster.name}을/를 쓰려트렸다!");
                 Console.WriteLine(" ===================================== ");
                 Thread.Sleep(2000);
                 // 플레이어와 몬스터의 체력을 초기화하고 원래의 위치로 돌아감
-                //player.nowHp = player.maxHp;
                 monster.nowHp = monster.maxHp;
+                player.mCount++;
                 game.ChangeScene(game.preScene);
             }
         }
@@ -133,7 +131,6 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     int result = player.PlayerRun(player, monster);
                     if (result == 0)
                     {
-                        player.nowHp = player.maxHp;
                         monster.nowHp = monster.maxHp;
                         game.ChangeScene(game.preScene);
                     }

@@ -38,24 +38,25 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             Console.CursorVisible = false; // 커서를 숨기는 기능
             map = new bool[,] // 이동가능지역 ture
             {
-                { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false },
-                { false,  true,  true, false, false,  true,  true,  true,  true,  true,  true,  true,  true, false, false, false, false, false },
-                { false,  true,  true,  true, false,  true, false, false, false,  true, false, false,  true, false, false, false,  true, false },
-                { false, false,  true,  true,  true,  true,  true, false, false,  true, false, false,  true, false, false,  true,  true, false },
-                { false, false, false,  true,  true, false,  true,  true,  true, false, false, false,  true, false, false,  true, false, false },
-                { false, false, false,  true, false, false,  true, false,  true,  true, false, false,  true,  true, false,  true,  true, false },
-                { false, false, false,  true, false, false,  true, false, false,  true,  true,  true, false,  true, false, false,  true, false },
-                { false, false, false,  true, false, false,  true,  true, false, false, false,  true, false,  true, false, false,  true, false },
-                { false, false, false,  true, false, false, false,  true,  true, false, false, false, false,  true,  true, false,  true, false },
-                { false, false,  true,  true, false, false, false, false,  true,  true, false, false, false, false,  true, false,  true, false },
-                { false,  true,  true, false, false, false, false, false, false,  true, false, false,  true, false,  true, false,  true, false },
-                { false,  true, false, false, false, false, false, false, false,  true, false,  true,  true, false,  true,  true,  true, false },
-                { false,  true, false, false, false, false, false, false,  true,  true, false,  true,  true, false,  true,  true, false, false },
-                { false,  true, false, false, false, false, false, false,  true, false, false, false,  true,  true,  true,  true, false, false },
-                { false,  true, false, false, false,  true,  true,  true,  true, false, false, false, false,  true, false,  true,  true, false },
-                { false,  true, false, false,  true,  true, false, false,  true,  true, false,  true, false, false, false, false,  true, false },
-                { false,  true,  true, false,  true, false, false, false,  true,  true,  true,  true,  true,  true,  true,  true,  true, false },
-                { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false }
+           /*       0       1       2     3       4      5     6      7       8     9      10    11      12     13     14     15     16     17*/ 
+           /* 0*/{ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false },
+           /* 1*/{ false,  true,  true, false, false,  true,  true,  true,  true,  true,  true,  true,  true, false, false, false, false, false },
+           /* 2*/{ false,  true,  true,  true, false,  true, false, false, false,  true, false, false,  true, false, false, false,  true, false },
+           /* 3*/{ false, false,  true,  true,  true,  true,  true, false, false,  true, false, false, false, false, false,  true,  true, false },
+           /* 4*/{ false, false, false,  true,  true, false,  true,  true,  true, false, false, false, false, false, false,  true, false, false },
+           /* 5*/{ false, false, false,  true, false, false,  true, false,  true,  true, false, false,  true,  true, false,  true,  true, false },
+           /* 6*/{ false, false, false,  true, false, false,  true, false, false,  true,  true,  true, false,  true, false, false,  true, false },
+           /* 7*/{ false, false, false,  true, false, false,  true,  true, false, false, false,  true, false,  true, false, false,  true, false },
+           /* 8*/{ false, false, false,  true, false, false, false,  true,  true, false, false, false, false,  true,  true, false,  true, false },
+           /* 9*/{ false, false,  true,  true, false, false, false, false,  true,  true, false, false, false, false,  true, false,  true, false },
+           /*10*/{ false,  true,  true, false, false, false, false, false, false,  true, false, false,  true, false,  true, false,  true, false },
+           /*11*/{ false,  true, false, false, false, false, false, false, false,  true, false,  true,  true, false,  true,  true,  true, false },
+           /*12*/{ false,  true, false, false, false, false, false, false,  true,  true, false,  true,  true, false,  true,  true, false, false },
+           /*13*/{ false,  true, false, false, false, false, false, false,  true, false, false, false,  true,  true,  true,  true, false, false },
+           /*14*/{ false,  true, false, false, false,  true,  true,  true,  true, false, false, false, false,  true, false,  true,  true, false },
+           /*15*/{ false,  true, false, false,  true,  true, false, false,  true,  true, false,  true, false, false, false, false,  true, false },
+           /*16*/{ false,  true,  true, false,  true, false, false, false,  true,  true,  true,  true,  true,  true,  true,  true,  true, false },
+           /*17*/{ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false }
             };
             bossMobPos.x = 16; bossMobPos.y = 2;// 보스 위치 설정
         }
@@ -64,7 +65,6 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             switch (nowState)
             {
                 case State.Start:
-                    player.nowHp = player.maxHp;
                     Console.SetCursorPosition(0, 0); //맵의 깜빡임을 없애기 위한 커서 위치 이동
                     printM.PrintMap(map);
                     printM.PrintPlayer(playerPos);

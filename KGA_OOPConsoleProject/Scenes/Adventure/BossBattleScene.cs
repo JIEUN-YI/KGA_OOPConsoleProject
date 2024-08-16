@@ -2,8 +2,10 @@
 using KGA_OOPConsoleProject.Monsters;
 /* 코멘트
  * Render()와 Update() 함수를 좀 더 명확하게 구별하여 쓰는 방법을 연구할 필요가 있음
- * - 이중 스위치문을 사용하여 해결하고자 했으나 플레이어와 몬스터의 상태 2가지로 구별해야해서 적합하지 않음
- *      => 결국 Render에서 그리기만 하는 것이 아니라 상태를 업데이트도 동시에 진행함
+ * - 스위치문과 if문의 중복말고 다른 방법이 있지 않을까 고민됨
+ * 
+ * 보스 몬스터를 처치 후 타이틀을 획득하고 획득한 타이틀을 알려주는 알고리즘을 추가하고 싶으나 추가하지 못함
+ * - game.preScene 데이터에 따라서 타이틀의 종류가 달라짐
  */
 namespace KGA_OOPConsoleProject.Scenes.Adventure
 {
@@ -12,6 +14,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
         public enum State { Live, Die }
         private State nowPlayerState;
         private State nowBossState;
+        public string titleName;
+        public TitleType getTitle;
 
         private string input;
 
@@ -20,8 +24,8 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 
         public BossBattleScene(GameData game, Player player) : base(game, player)
         {
-            this.game = game;
-            this.player = player;
+            //this.game = game;
+            //this.player = player;
         }
 
         public override void Enter()
@@ -33,14 +37,20 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             {
                 case VillageMtScene:
                     monster = VillageM.strongTiger;
+                    titleName = " 마을 뒷 산을 정복한 자 ";
+                    getTitle = TitleType.VillageMtConqueror;
                     battleM.PrintMobEnter(game.preScene, monster);
                     break;
                 case DeepRiverScene:
                     monster = DeepM.angryOtter;
+                    titleName = " 깊은 강가를 정복한 자 ";
+                    getTitle = TitleType.DeepRiverConqueror;
                     battleM.PrintMobEnter(game.preScene, monster);
                     break;
                 case DarkForestScene:
                     monster = DarkM.pollutionTiger;
+                    titleName = " 어두운 숲을 정복한 자 ";
+                    getTitle = TitleType.DarkForestConqueror;
                     battleM.PrintMobEnter(game.preScene, monster);
                     break;
                 default:
@@ -73,15 +83,12 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
             {
                 Console.Clear();
                 Console.WriteLine(" ===================================== ");
-                Console.WriteLine($" {monster.name}은/는 {player.name}을/를 \n 쓰려트렸다!");
+                Console.WriteLine($" {monster.name}은/는 \n {player.name}을/를 쓰려트렸다!");
                 Console.WriteLine($" {player.name}는 지고 말았다......");
                 Console.WriteLine(" ===================================== ");
                 Thread.Sleep(2000);
-                // 플레이어와 몬스터의 체력을 초기화하고 원래의 위치로 돌아감
-                nowPlayerState = State.Live;
-                player.nowHp = player.maxHp;
-                monster.nowHp = monster.maxHp;
-                ChangeScene(game.preScene);
+                // 원래의 위치로 돌아감
+                game.ChangeScene(game.preScene);
 
             }
             else if (nowBossState == State.Die) // 몬스터 사망 시
@@ -89,14 +96,14 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                 Console.Clear();
                 Console.WriteLine(" ===================================== ");
                 Console.WriteLine($" {player.name}은/는 {monster.name}을/를 \n 쓰려트렸다!");
-                Console.WriteLine($" {player.name}는 \" 마을 뒷 산을 정복한자\" \n 타이틀을 얻었다!");
+                Console.WriteLine($" {player.name}은/는 {titleName}타이틀을 얻었다!");
                 Console.WriteLine(" ===================================== ");
                 Thread.Sleep(2000);
-                // 플레이어와 몬스터의 체력을 초기화하고 원래의 위치로 돌아감
-                player.nowHp = player.maxHp;
-                monster.nowHp = monster.maxHp;
-                player.playerTitle[0] = TitleType.VillageMtConqueror; // 업적 타이틀 획득
-                ChangeScene(game.preScene);
+                // 원래의 위치로 돌아감
+                // 업적 타이틀 획득
+                player.GetTitle(getTitle);
+                player.mCount++;
+                game.ChangeScene(game.preScene);
             }
         }
         public override void Input()
@@ -136,10 +143,9 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
                     int result = player.PlayerRun(player, monster);
                     if (result == 0)
                     {
-                        player.nowHp = player.maxHp;
-                        monster.nowHp = monster.maxHp;
-                        game.ChangeScene(game.preScene);
+                        nowPlayerState = State.Die;
                     }
+                    game.ChangeScene(game.preScene);
                     break;
                 case "3":
                     // 추후 인벤토리 추가 예정
@@ -151,7 +157,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 
         }
 
-        /// <summary>
+        /*/// <summary>
         /// 전투 진행 함수
         /// </summary>
         /// <param name="input"></param>
@@ -223,7 +229,7 @@ namespace KGA_OOPConsoleProject.Scenes.Adventure
 
 
             }
-        }
+        }*/
 
     }
 

@@ -1,7 +1,13 @@
 ﻿using KGA_OOPConsoleProject.Items;
 using KGA_OOPConsoleProject.Monsters;
 using System.Threading;
-
+/* 코멘트
+ * 업적을 스택으로 구현
+ * - 배열과 리스트로 고민해보았으나, 변동 없이 저장만 한다는 점에서 스택이 좋을 것 같아서 스택으로 사용
+ * - 엔딩이나 출력시에는 contain함수로 획득 여부를 확인하면 좋을 것 같음
+ * 플레이어의 스탯 / 게임일수 / 최대 스탯은 게임 난이도에 따라서 조절 필수
+ * - 임의로 10일동안 최대스탯 100으로 설정
+ */
 namespace KGA_OOPConsoleProject
 {
     public class Player
@@ -9,7 +15,7 @@ namespace KGA_OOPConsoleProject
         // 플레이어가 필요로 하는 변수
         public GameData game;
         public string name;
-        public TitleType[] playerTitle = new TitleType[3];
+        public Stack<TitleType> Titles =new Stack<TitleType>(3);
         public int money;
         public List<Item> inventory = new List<Item>(16);
         public Item[] equip = new Item[2];
@@ -40,9 +46,8 @@ namespace KGA_OOPConsoleProject
         public Player() // 플레이어 생성자 - 플레이어 기본 값
         {
             money = 500;
-            maxHp = 40;
-            //nowHp = maxHp;
-            ATK = 15;
+            maxHp = 50;
+            ATK = 50;
             DEF = 15;
             mCount = 0;
             str = 0;
@@ -80,8 +85,11 @@ namespace KGA_OOPConsoleProject
             Console.WriteLine($" 사냥한 몬스터 수 : {mCount,-2}");
             Console.WriteLine($" 소지금 : {money,-2}G");
             Console.WriteLine(" ===================================== ");
+            Console.WriteLine(" 획득한 업적 ");
+            ShowTitle();
+            Console.WriteLine(" ===================================== ");
+            Console.WriteLine();
             Console.WriteLine("     돌아가려면 아무키나 누르세요      ");
-            //Console.ReadKey();
             game.nowScene.Enter();
         }
         /// <summary>
@@ -152,13 +160,13 @@ namespace KGA_OOPConsoleProject
                     monster.MonsterAttack(player, monster);
                     if(PlayerLive(player) == false)
                     {
+
                         result = 0;// 플레이어 사망
                     }
                     else
                     {
                         result = 1;// 플레이어 생존
                     }
-                    //PlayerLive(player);
                     Thread.Sleep(2000);
                     return result;
                 case 1:
@@ -174,6 +182,34 @@ namespace KGA_OOPConsoleProject
             return result;
         }
 
+        /// <summary>
+        /// 획득한 타이틀을 스택에 저장하는 함수
+        /// </summary>
+        /// <param name="getTitle"></param>
+        public void GetTitle(TitleType getTitle)
+        {
+            Titles.Push(getTitle);
+        }
+
+        /// <summary>
+        /// 획득한 업적을 출력하는 함수
+        /// </summary>
+        public void ShowTitle()
+        {
+            if (Titles.Contains(TitleType.VillageMtConqueror))
+            {
+                Console.WriteLine("마을 뒷 산을 정복한 자");
+            }
+            if (Titles.Contains(TitleType.DeepRiverConqueror))
+            {
+                Console.WriteLine("깊은 강가를 정복한 자");
+            }
+            if (Titles.Contains(TitleType.DarkForestConqueror))
+            {
+                Console.WriteLine("어두운 숲을 정복한 자");
+            }
+
+        }
 
         /*
          * ShowStatus() - 플레이어의 현재 스탯을 보여주는 함수 / Math.Clamp를 사용하여 최소값과 최대값을 지정
