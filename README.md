@@ -11,6 +11,24 @@
 
 기획 링크 : https://codingloading.tistory.com/33 - 비밀번호 KGA
 
+#### 2024.08.16 기준 완성 내역
+
+1. 캐릭터의 이름을 정해 플레이를 시작
+![image](https://github.com/user-attachments/assets/82ee749d-c203-40d2-9521-4ffbec1634ef) ![image](https://github.com/user-attachments/assets/85cf6984-365e-4545-86d7-bb45c89ad73e) ![image](https://github.com/user-attachments/assets/6b13d494-d99c-4fe0-bc35-40094b244991)
+
+2. 플레이어가 원하는데로 캐릭터에게 수업과 모험을 선택해서 진행
+   ![image](https://github.com/user-attachments/assets/19df3336-4b1f-418c-afd2-80fb7629cbe4)
+![image](https://github.com/user-attachments/assets/10a3ad0a-30c6-4d24-8742-6b2714316366)
+![image](https://github.com/user-attachments/assets/6708be8f-336c-4b2d-9bd1-62bb41680d1a)
+
+
+3. 수업과 모험을 진행하여 캐릭터의 능력치를 올리거나 업적을 달성
+![image](https://github.com/user-attachments/assets/1d594fd0-a333-4f47-924d-726e1e3e8a38)
+![image](https://github.com/user-attachments/assets/3c66702e-840a-4597-a113-e068324aa63f)
+![image](https://github.com/user-attachments/assets/af87fcd6-6014-4b50-9746-b25a988a6a26)
+![image](https://github.com/user-attachments/assets/c516f79a-a78c-4a78-988c-40493c9a405c)
+
+
 
 ### 개발 일정
 1일차(12일)
