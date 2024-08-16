@@ -29,6 +29,7 @@ namespace KGA_OOPConsoleProject
     }
     /* weapon(무기), device(방어구), supplies(소모품) */
 
+
     // 타이틀 종류 열거형
     public enum TitleType
     {

@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Items.cs" />
     <Compile Remove="Scenes\Adventure\AdventureManager.cs" />
     <Compile Remove="Scenes\Adventure\BattleManager.cs" />
   </ItemGroup>

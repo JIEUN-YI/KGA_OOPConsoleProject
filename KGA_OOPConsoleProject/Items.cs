@@ -1,18 +1,24 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KGA_OOPConsoleProject.Items
+namespace KGA_OOPConsoleProject
 {
     // 아이템 생성 클래스
-    public abstract class Item
+    public class Items
     {
+        /*public struct Item
+        {
+            public string name;
+            public ItemsType itemType;
+            public int itemCost;
+        }
         // 아이템 사용 변수
-        public string name;
+        /*public string name;
         public ItemsType type;
-        public int cost;
+        public int cost;*/
 
         /*
          * name - string 타입 아이템 이름
@@ -20,7 +26,7 @@ namespace KGA_OOPConsoleProject.Items
          * cost - 아이템 구매 비용
          */
 
-        // 아이템 별 사용 함수 - 상속으로 아이템의 변수를 상속받게 해서 아이템 종류를 제작 후 알맞은 함수 사용
+        /*// 아이템 별 사용 함수 - 상속으로 아이템의 변수를 상속받게 해서 아이템 종류를 제작 후 알맞은 함수 사용
         public abstract void UseItem();
 
         public abstract void EquipItem();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 /* 코멘트
  * IAdventure에서 Point를 이용하여 맵에서의 이동을 제어하는 클래스 제작
  */
-namespace KGA_OOPConsoleProject.Manager
+namespace KGA_OOPConsoleProject.Manager.AdventureManager
 {
     public class MoveManager : IAdventure
     {

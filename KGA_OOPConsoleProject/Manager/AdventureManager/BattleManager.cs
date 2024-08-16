@@ -5,7 +5,7 @@ using KGA_OOPConsoleProject.Scenes.Adventure;
 /* 코멘트
  * IAdventure를 사용하여 Battle Scene에 사용하는 함수를 모은 클래스
  */
-namespace KGA_OOPConsoleProject.Manager
+namespace KGA_OOPConsoleProject.Manager.AdventureManager
 {
     public class BattleManager : IAdventure
     {

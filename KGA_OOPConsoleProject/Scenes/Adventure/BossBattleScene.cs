@@ -1,4 +1,4 @@
-﻿using KGA_OOPConsoleProject.Manager;
+﻿using KGA_OOPConsoleProject.Manager.AdventureManager;
 using KGA_OOPConsoleProject.Monsters;
 /* 코멘트
  * Render()와 Update() 함수를 좀 더 명확하게 구별하여 쓰는 방법을 연구할 필요가 있음

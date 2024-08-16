@@ -1,4 +1,4 @@
-﻿using KGA_OOPConsoleProject.Items;
+﻿using KGA_OOPConsoleProject.Interface;
 using KGA_OOPConsoleProject.Monsters;
 using System.Threading;
 /* 코멘트
@@ -17,8 +17,8 @@ namespace KGA_OOPConsoleProject
         public string name;
         public Stack<TitleType> Titles =new Stack<TitleType>(3);
         public int money;
-        public List<Item> inventory = new List<Item>(16); // 아이템을 저장하는 인벤토리 용량 16의 리스트
-        public List<Item> equip = new List<Item>(2); // 무기/방어구 아이템을 장비하는 장비칸 리스트로 제작
+        public List<IItem.Item> inventory = new List<IItem.Item>(16); // 아이템을 저장하는 인벤토리 용량 16의 리스트
+        public List<IItem.Item> equip = new List<IItem.Item>(2); // 무기/방어구 아이템을 장비하는 장비칸 리스트로 제작
         // public Item[] equip = new Item[2]; 
         public int maxHp;
         public int nowHp;
@@ -97,13 +97,13 @@ namespace KGA_OOPConsoleProject
         /// 인벤토리 구성 함수 - 추후 다시 구상하기
         /// </summary>
         /// <param name="Inventory"></param>
-        private void ShowInventory(List<Item> Inventory)
+        private void ShowInventory(List<IItem.Item> Inventory)
         {
             for (int i = 0; i < Inventory.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {Inventory[i].name}");
-                Console.WriteLine($"{Inventory[i].type,+4}");
-                Console.WriteLine($"{Inventory[i].cost,+4}");
+                Console.WriteLine($"{Inventory[i].itemType,+4}");
+                Console.WriteLine($"{Inventory[i].itemCost,+4}");
                 Console.WriteLine(" ===================================== ");
                 //name - string 타입 아이템 이름 type -Items 아이템 열거형 타입
                 //cost - 아이템 구매 비용*/

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 /* 코멘트
  * IAdventure를 이용하여 맵을 그리고 플레이어/몬스터/보스를 출력하기위한 클래스 제작
  */
-namespace KGA_OOPConsoleProject.Manager
+namespace KGA_OOPConsoleProject.Manager.AdventureManager
 {
     public class PrintgMapManager : IAdventure
     {
@@ -77,9 +77,9 @@ namespace KGA_OOPConsoleProject.Manager
         /// </summary>
         /// <param name="MobState"></param>
         /// <param name="MobPos"></param>
-       public void StateCheckPrintMob(IAdventure.State MobState, IAdventure.Point MobPos)
+        public void StateCheckPrintMob(IAdventure.State MobState, IAdventure.Point MobPos)
         {
-            if(MobState == IAdventure.State.Live)
+            if (MobState == IAdventure.State.Live)
             {
                 PrintMob(MobPos);
             }

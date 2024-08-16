@@ -9,7 +9,7 @@
  * 
  */
 using KGA_OOPConsoleProject.Interface;
-using KGA_OOPConsoleProject.Manager;
+using KGA_OOPConsoleProject.Manager.AdventureManager;
 using KGA_OOPConsoleProject.Monsters;
 
 namespace KGA_OOPConsoleProject.Scenes.Adventure
