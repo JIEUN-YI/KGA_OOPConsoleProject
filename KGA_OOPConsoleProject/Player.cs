@@ -17,8 +17,9 @@ namespace KGA_OOPConsoleProject
         public string name;
         public Stack<TitleType> Titles =new Stack<TitleType>(3);
         public int money;
-        public List<Item> inventory = new List<Item>(16);
-        public Item[] equip = new Item[2];
+        public List<Item> inventory = new List<Item>(16); // 아이템을 저장하는 인벤토리 용량 16의 리스트
+        public List<Item> equip = new List<Item>(2); // 무기/방어구 아이템을 장비하는 장비칸 리스트로 제작
+        // public Item[] equip = new Item[2]; 
         public int maxHp;
         public int nowHp;
         public int ATK;
