@@ -41,7 +41,7 @@ namespace KGA_OOPConsoleProject.Scenes
                 Console.WriteLine($" 체력   : {player.maxHp,+2}");
                 Console.WriteLine($" 공격력 : {player.ATK,+2}");
                 Console.WriteLine($" 방어력 : {player.DEF,+2}");
-                Console.WriteLine($" 무술능력 : {player.str,+2}");
+                Console.WriteLine($" 무술능력 : {player.STR,+2}");
                 Console.WriteLine($" 지력   : {player.INT,+2}");
                 Console.WriteLine($" 예법   : {player.manner,+2}");
                 Console.WriteLine($" 감수성 : {player.sensi,+2}");

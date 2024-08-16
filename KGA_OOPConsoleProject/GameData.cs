@@ -53,6 +53,7 @@ namespace KGA_OOPConsoleProject
             scenes[(int)SceneType.Select] = new SelectScene(this, player);
             scenes[(int)SceneType.Room] = new RoomScene(this, player);
             scenes[(int)SceneType.Shop] = new ShopScene(this, player);
+            scenes[(int)SceneType.Inventory] = new InventoryScene(this, player);
             scenes[(int)SceneType.Training] = new TrainingScene(this, player);
             scenes[(int)SceneType.School] = new SchoolScene(this, player);
             scenes[(int)SceneType.Manner] = new MannerScene(this, player);

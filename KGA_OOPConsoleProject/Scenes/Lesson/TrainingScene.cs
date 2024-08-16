@@ -99,11 +99,11 @@ namespace KGA_OOPConsoleProject.Scenes.Lesson
         public void UpgradeStatus()
         {
             player.maxHp += 10;
-            player.str += 10;
+            player.STR += 10;
             player.ATK += 5;
             player.DEF += 5;
             player.maxHp = Math.Clamp(player.maxHp, 0, 100);
-            player.str = Math.Clamp(player.str, 0, 100);
+            player.STR = Math.Clamp(player.STR, 0, 100);
             player.ATK = Math.Clamp(player.ATK, 0, 100);
             player.DEF = Math.Clamp(player.DEF, 0, 100);
         }

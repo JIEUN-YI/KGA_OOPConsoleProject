@@ -30,6 +30,7 @@
                 Console.WriteLine(" 1. 스케쥴 수행하기");
                 Console.WriteLine(" 2. 상점가기");
                 Console.WriteLine(" 3. 상태보기");
+                Console.WriteLine(" 4. 인벤토리");
                 // 아이템 구현 후 인벤토리 보기 구현예정
                 Console.Write(" 선택 : ");
             }
@@ -56,6 +57,9 @@
                         break;
                     case "3":
                         nowState = State.Status;
+                        break;
+                    case "4":
+                        game.ChangeScene(SceneType.Inventory);
                         break;
                     default:
                         break;

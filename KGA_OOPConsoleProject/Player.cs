@@ -1,5 +1,6 @@
 ﻿using KGA_OOPConsoleProject.Interface;
 using KGA_OOPConsoleProject.Monsters;
+using KGA_OOPConsoleProject.Items;
 using System.Threading;
 /* 코멘트
  * 업적을 스택으로 구현
@@ -17,15 +18,15 @@ namespace KGA_OOPConsoleProject
         public string name;
         public Stack<TitleType> Titles =new Stack<TitleType>(3);
         public int money;
-        public List<IItem.Item> inventory = new List<IItem.Item>(16); // 아이템을 저장하는 인벤토리 용량 16의 리스트
-        public List<IItem.Item> equip = new List<IItem.Item>(2); // 무기/방어구 아이템을 장비하는 장비칸 리스트로 제작
+        public List<Item> inventory = new List<Item>(16); // 아이템을 저장하는 인벤토리 용량 16의 리스트
+        public List<Item> equip = new List<Item>(2); // 무기/방어구 아이템을 장비하는 장비칸 리스트로 제작
         // public Item[] equip = new Item[2]; 
         public int maxHp;
         public int nowHp;
         public int ATK;
         public int DEF;
         public int mCount;
-        public int str;
+        public int STR;
         public int INT;
         public int manner;
         public int sensi;
@@ -51,7 +52,7 @@ namespace KGA_OOPConsoleProject
             ATK = 50;
             DEF = 15;
             mCount = 0;
-            str = 0;
+            STR = 0;
             INT = 0;
             manner = 0;
             sensi = 0;
@@ -68,7 +69,7 @@ namespace KGA_OOPConsoleProject
             mCount = Math.Clamp(mCount, 0, 100);
             ATK = Math.Clamp(ATK, 0, 100);
             DEF = Math.Clamp(DEF, 0, 100);
-            str = Math.Clamp(str, 0, 100);
+            STR = Math.Clamp(STR, 0, 100);
             INT = Math.Clamp(INT, 0, 100);
             manner = Math.Clamp(manner, 0, 100);
             sensi = Math.Clamp(sensi, 0, 100);
@@ -79,7 +80,7 @@ namespace KGA_OOPConsoleProject
             Console.WriteLine($" 체력   : {maxHp,-2}");
             Console.WriteLine($" 공격력 : {ATK,-2}");
             Console.WriteLine($" 방어력 : {DEF,-2}");
-            Console.WriteLine($" 무술능력 : {str,-2}");
+            Console.WriteLine($" 무술능력 : {STR,-2}");
             Console.WriteLine($" 지력   : {INT,-2}");
             Console.WriteLine($" 예법   : {manner,-2}");
             Console.WriteLine($" 감수성 : {sensi,-2}");
@@ -97,7 +98,7 @@ namespace KGA_OOPConsoleProject
         /// 인벤토리 구성 함수 - 추후 다시 구상하기
         /// </summary>
         /// <param name="Inventory"></param>
-        private void ShowInventory(List<IItem.Item> Inventory)
+        private void ShowInventory(List<Item> Inventory)
         {
             for (int i = 0; i < Inventory.Count; i++)
             {
@@ -211,6 +212,7 @@ namespace KGA_OOPConsoleProject
             }
 
         }
+
 
         /*
          * ShowStatus() - 플레이어의 현재 스탯을 보여주는 함수 / Math.Clamp를 사용하여 최소값과 최대값을 지정

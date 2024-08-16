@@ -10,8 +10,11 @@ namespace KGA_OOPConsoleProject
     // 장면 열거형
     public enum SceneType
     {
-        Title, Select, Room, Shop, Training, School, Manner, Music, VillageMt, DeepRiver, DarkForest, 
-        SelectSchedule, AdventureSelect, Battle, BossBattle, Ending, Size
+        Title, Select, Room, Shop, Inventory, 
+        Training, School, Manner, Music, 
+        VillageMt, DeepRiver, DarkForest, 
+        SelectSchedule, AdventureSelect, 
+        Battle, BossBattle, Ending, Size
     }
     /*
      * Title(게임시작 타이틀화면) , Select(게임정보 입력화면), 
@@ -39,4 +42,11 @@ namespace KGA_OOPConsoleProject
      * DeepRiverConqueror - 깊은 강가를 정복한 자 / 깊은 강가 보스 처치 후 획득 가능
      * DarkForestConqueror - 어두운 숲을 정복한 자 / 어두운 숲 보스 처치 후 획득 가능
      */
+
+    public enum StatusType
+    {
+        maxHp, ATK, DEF, STR, INT, manner, sensi
+     // 체력, 공격력, 방어력, 무술능력, 지력, 예법, 감수성
+    }
+
 }

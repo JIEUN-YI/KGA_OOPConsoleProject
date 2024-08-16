@@ -8,14 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Manager\ItemManager\**" />
     <Compile Remove="Monsters\Boss\**" />
     <Compile Remove="Monsters\DarkM\**" />
     <Compile Remove="Monsters\DeepM\**" />
     <Compile Remove="Monsters\VillageM\**" />
+    <EmbeddedResource Remove="Manager\ItemManager\**" />
     <EmbeddedResource Remove="Monsters\Boss\**" />
     <EmbeddedResource Remove="Monsters\DarkM\**" />
     <EmbeddedResource Remove="Monsters\DeepM\**" />
     <EmbeddedResource Remove="Monsters\VillageM\**" />
+    <None Remove="Manager\ItemManager\**" />
     <None Remove="Monsters\Boss\**" />
     <None Remove="Monsters\DarkM\**" />
     <None Remove="Monsters\DeepM\**" />
@@ -26,6 +29,11 @@
     <Compile Remove="Items.cs" />
     <Compile Remove="Scenes\Adventure\AdventureManager.cs" />
     <Compile Remove="Scenes\Adventure\BattleManager.cs" />
+    <Compile Remove="Struct.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Manager\ItemManager\SuppliesManager.cs" />
   </ItemGroup>
 
 </Project>
